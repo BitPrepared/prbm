@@ -4,8 +4,8 @@
   </description>
 
   <!-- imposta le property globali -->
-  <property name="target" value="1.7"/>
-  <property name="source" value="1.7"/>
+  <property name="target" value="1.6"/>
+  <property name="source" value="1.6"/>
   <property name="src" location="src"/>
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
