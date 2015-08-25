@@ -38,7 +38,9 @@ public class TemplateBox extends Dialog implements ActionListener
 
         result=new String("");
 
-    	setLayout(null);
+    	//setLayout(null);
+    	// Disabling due to NullPointerException
+    	
     	addNotify();
     	setSize(350,135);
         Label label = new Label("Scegli il template che vuoi utilizzare per l'esportazione:");
