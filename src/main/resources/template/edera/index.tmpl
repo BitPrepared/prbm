@@ -1,0 +1,144 @@
+<HTML>
+<HEAD>
+  <TITLE>Percorso Rettificato Belga Multimediale</TITLE>
+<link href="edera.css" rel="stylesheet" type="text/css">
+</HEAD>
+
+<BODY TEXT="#000000" BGCOLOR="#FFFFFF" LINK="#0000FF" VLINK="#FF0000" ALINK="#000088">
+  <CENTER>
+
+  <!-- Tabella principale -->
+  <TABLE CELLSPACING=0 CELLPADDING=0 WIDTH="100%" >
+    <TR>
+      <TD WIDTH="100%">
+        <!-- Tabella titolo -->
+        <TABLE BORDER=0 CELLSPACING=0 WIDTH="100%" BGCOLOR="#3366FF" >
+          <TR class="header">
+            <TD WIDTH="20%" ALIGN=CENTER><a href="<?PRBM subst programma.guida.link?>"><IMG SRC="icone/guida.gif" BORDER=0></a></TD>
+            <TD WIDTH="60%">
+              <CENTER>
+                <FONT COLOR="#999900"><strong> 
+                <?PRBM subst programma.nome?>
+                </strong></FONT> 
+              </CENTER>
+              <CENTER>
+                <font size="7"><B><A HREF="info.html"><FONT COLOR="#FFFFFF"> 
+                <?PRBM subst percorso.titolo?>
+                </FONT></A></B></font> 
+              </CENTER>
+              <CENTER><I><FONT FACE="Arial,Helvetica"><FONT SIZE=+1><?PRBM subst percorso.luogo?> - (<?PRBM subst percorso.dataora?>)</FONT></FONT></I></CENTER>
+            </TD>
+            <TD WIDTH="20%" ALIGN=CENTER><a href="<?PRBM subst programma.guida.link?>"><IMG SRC="icone/guida.gif" BORDER=0></a></TD>
+          </TR>
+        </TABLE>
+        &nbsp;
+      </TD>
+    </TR>
+    <TR>
+    <TD WIDTH="100%" CELLSPACING="0">
+
+    <TABLE WIDTH="100%" BORDER class="tabella" >
+      <TR>
+        <TD WIDTH="22%" NOWRAP class="grass">Sinistra lontano</TD>
+        <TD WIDTH="22%" NOWRAP class="grass">Sinistra vicino</TD>
+        <TD WIDTH="12%" NOWRAP BGCOLOR="#FFFFCC" class="grass">Dati Topografici</TD>
+        <TD WIDTH="22%" NOWRAP class="grass">Destra vicino</TD>
+        <TD WIDTH="22%" NOWRAP class="grass">Destra lontano</TD>
+      </TR>
+<?PRBM repeat traccia?>
+      <TR>
+        <TD WIDTH="22%" class="tabella">
+<?PRBM if traccia.sxf?>
+	        <table border=0>
+<?PRBM repeat traccia.sxf.scheda?>
+            <tr>
+              <td><img src="<?PRBM substr traccia.sxf.scheda.ico.src?>" border=0></td>
+                  <td><a href="<?PRBM substr traccia.sxf.scheda.link?>"> 
+                    <?PRBM substr traccia.sxf.scheda.titolo?>
+                    </a></td>
+            </tr>
+<?PRBM endrpt traccia.sxf.scheda?> 
+          </table>      
+<?PRBM else traccia.sxf?>
+          &nbsp
+<?PRBM endif traccia.sxf?>
+	      </TD>
+        <TD WIDTH="22%" class="tabella">
+<?PRBM if traccia.sxn?>
+	        <table border=0>
+<?PRBM repeat traccia.sxn.scheda?>
+            <tr>
+              <td><img src="<?PRBM substr traccia.sxn.scheda.ico.src?>" border=0></td>
+              <td><a href="<?PRBM substr traccia.sxn.scheda.link?>"><?PRBM substr traccia.sxn.scheda.titolo?></a></td>
+            </tr>
+<?PRBM endrpt traccia.sxn.scheda?> 
+          </table>      
+<?PRBM else traccia.sxn?>
+          &nbsp
+<?PRBM endif traccia.sxn?>
+        </TD>
+        <TD WIDTH="12%" BGCOLOR="#333300" class="tabella" CELLSPACING=0>
+          <TABLE WIDTH="100%" CELLSPACING=0 CELLPADDING=0>
+            <TR>
+              <TD Align=Right><FONT SIZE=-1>Direzione:</FONT></TD>
+              <TD NOWRAP><FONT SIZE=-1><?PRBM substr traccia.data.dir?></FONT></TD>
+            </TR>
+            <TR>
+              <TD Align=Right><FONT SIZE=-1>Distanza:</FONT></TD>
+              <TD NOWRAP><FONT SIZE=-1><?PRBM substr traccia.data.dist?>mt</FONT></TD>
+            </TR>
+            <TR>
+                  <TD COLSPAN=2 ALIGN=CENTER NOWRAP>
+                    <?PRBM substr traccia.data.min?>
+                    <font size="-1">min.</font></TD>
+            </TR>
+          </TABLE>
+        </TD>
+        <TD WIDTH="22%" class="tabella">
+<?PRBM if traccia.dxn?>
+	        <table border=0>
+<?PRBM repeat traccia.dxn.scheda?>
+            <tr>
+              <td><img src="<?PRBM substr traccia.dxn.scheda.ico.src?>" border=0></td>
+              <td><a href="<?PRBM substr traccia.dxn.scheda.link?>"><?PRBM substr traccia.dxn.scheda.titolo?></a></td>
+            </tr>
+<?PRBM endrpt traccia.dxn.scheda?> 
+          </table>      
+<?PRBM else traccia.dxn?>
+          &nbsp
+<?PRBM endif traccia.dxn?>
+	      </TD>
+        <TD WIDTH="22%" class="tabella">
+<?PRBM if traccia.dxf?>
+	        <table border=0>
+<?PRBM repeat traccia.dxf.scheda?>
+            <tr>
+              <td><img src="<?PRBM substr traccia.dxf.scheda.ico.src?>" border=0></td>
+              <td><a href="<?PRBM substr traccia.dxf.scheda.link?>"><?PRBM substr traccia.dxf.scheda.titolo?></a></td>
+            </tr>
+<?PRBM endrpt traccia.dxf.scheda?> 
+          </table>      
+<?PRBM else traccia.dxf?>
+          &nbsp
+<?PRBM endif traccia.dxf?>
+        </TD>
+      </TR>
+<?PRBM endrpt traccia?>
+    </TABLE>
+    </TD>
+    </TR>
+    <TR>
+      <TD WIDTH="100%" CELLSPACING="0">
+
+        <!-- Tabella di coda -->
+        <TABLE BORDER=0 WIDTH="100%" >
+          <TR>
+            <TD BGCOLOR="#3366FF" class="header">&nbsp;</TD>
+          </TR>
+        </TABLE>
+      </TD>
+    </TR>
+  </TABLE>
+  </CENTER>
+</BODY>
+</HTML>

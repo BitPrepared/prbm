@@ -1,0 +1,229 @@
+<HTML>
+<HEAD>
+   <TITLE>Scheda <?PRBM subst scheda.tipo?></TITLE>
+<link href="edera.css" rel="stylesheet" type="text/css">
+</HEAD>
+
+<STYLE TYPE="text/css">
+   <!--
+      a:link {text-decoration: none}
+      a:active {text-decoration: none}
+      a:visited {text-decoration: none}
+      a:hover {text-decoration: underline; color: #FF0000}
+   -->
+</STYLE>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#009900" VLINK="#009900" ALINK="#009900">
+
+<!-- Intestazione -->
+<TABLE BORDER="0" CELLSPACING="2" CELLPADDING="4" WIDTH="100%">
+   <TR>
+      <TD BGCOLOR="#009900" class="header">
+         <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+           <TR>
+               <TD><IMG ALT="Logo del tipo scheda" BORDER="0" WIDTH="64" HEIGHT="64" HSPACE="8" VSPACE="8" SRC="<?PRBM subst scheda.ico.src?>"></TD>
+               <TD><FONT FACE="Verdana, Arial, Helvetica, sans-serif" COLOR="#FFFFFF" SIZE="+4"><I><B><?PRBM subst scheda.tipo?></B></I></FONT></TD>
+            </TR>
+         </TABLE>
+      </TD>
+   </TR>
+</TABLE>
+
+<!-- Corpo della scheda -->
+<TABLE BORDER="0" CELLSPACING="2" CELLPADDING="16" WIDTH="100%">
+  <TR> 
+    <!-- Inizio colonna di sinistra -->
+    <TD WIDTH="30%" ALIGN="CENTER" VALIGN="TOP" BGCOLOR="#FFCC66" class="tabella"> 
+      <?PRBM if scheda.immagine?>
+      <P><IMG SRC="<?PRBM subst scheda.immagine.src?>" ALT="<?PRBM subst scheda.didascalia?>" BORDER="0" <?PRBM calc_dim scheda.immagine.dimensioni(240, 192)?>><BR>
+        <FONT SIZE="-1">
+        <?PRBM subst scheda.didascalia?>
+        </FONT></P>
+      <?PRBM endif scheda.immagine?>
+      <center>
+        <?PRBM if scheda.audio?>
+        <a href="<?PRBM subst scheda.audio.src?>"><img src="immagini/audio.gif" border=0></a> 
+        <?PRBM endif scheda.audio?>
+        <?PRBM if scheda.video?>
+        <a href="<?PRBM subst scheda.video.src?>"><img src="immagini/video.gif" border=0></a> 
+        <?PRBM endif scheda.video?>
+        &nbsp;</center></TD>
+    <!-- Fine colonna di sinistra -->
+    <!-- Inizio colonna di destra -->
+    <TD WIDTH="70%" rowspan="2" VALIGN="TOP"> 
+      <!-- Tabella per Titolo -->
+      <TABLE BORDER="0" CELLPADDING="0" WIDTH="100%">
+        <!-- Linea Titolo -->
+        <TR>
+          <TD class="grass"> <FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="+2">
+            <?PRBM subst scheda.didascalia?>
+            </FONT><BR> <HR WIDTH="100%" COLOR="#009900" NOSHADE ALIGN="LEFT"> 
+          </TD>
+        </TR>
+        <!-- Linea Data e Ora rilevazione -->
+        <?PRBM if scheda.dataora?>
+        <TR>
+          <TD ALIGN="RIGHT" class="grass"> <FONT SIZE="-1"><B>
+            <?PRBM subst scheda.dataora.value?>
+            </B></FONT> </TD>
+        </TR>
+        <?PRBM endif scheda.dataora?>
+      </TABLE>
+      <!-- Tabella per i vari elementi di testo -->
+      <TABLE BORDER="0" CELLPADDING="8" CELLSPACING="4">
+        <?PRBM if scheda.nominativo?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Nominativo<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.nominativo.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.nominativo?>
+        <?PRBM if scheda.eta?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Et&agrave;<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.eta.value?>
+            anni</TD>
+        </TR>
+        <?PRBM endif scheda.eta?>
+        <?PRBM if scheda.professione?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Professione<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.professione.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.professione?>
+        <?PRBM if scheda.statoCivile?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Stato civile<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.statoCivile.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.statoCivile?>
+        <?PRBM if scheda.provenienza?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">&Eacute; del 
+            luogo o &eacute; forestiero?<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.provenienza.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.provenienza?>
+        <?PRBM if scheda.veste?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">&Eacute; stato 
+            intervistato in veste di...<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.veste.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.veste?>
+        <?PRBM if scheda.perche?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Perch&egrave; 
+            lo si &eacute; intervistato?<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.perche.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.perche?>
+        <?PRBM if scheda.come?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Come si &eacute; 
+            arrivati a lui?<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.come.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.come?>
+        <?PRBM if scheda.statoAnimo?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Stato d'animo 
+            dell'intervistato<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.statoAnimo.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.statoAnimo?>
+        <?PRBM if scheda.gradimento?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Gradimento 
+            dell'intervistato<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.gradimento.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.gradimento?>
+        <?PRBM if scheda.affidabilita?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Affidabilit&agrave; 
+            del racconto<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.affidabilita.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.affidabilita?>
+        <?PRBM if scheda.fedelta?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Fedelt&agrave; 
+            del racconto<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.fedelta.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.fedelta?>
+        <?PRBM if scheda.rapporto?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Rapporto con 
+            l'intervistato<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.rapporto.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.rapporto?>
+        <?PRBM if scheda.trascrizione?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Trascrizione 
+            dell'intervista<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.trascrizione.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.trascrizione?>
+      </TABLE>
+      <!-- Fine colonna di destra -->
+    </TD>
+  </TR>
+  <TR>
+    <TD VALIGN="TOP" ALIGN="CENTER">&nbsp;</TD>
+  </TR>
+</TABLE>
+
+<!-- Barra dei comandi inferiore -->
+<TABLE CELLSPACING="2" CELLPADDING="4" BORDER="0" WIDTH="100%">
+   <TR>
+      <TD ALIGN="CENTER" BGCOLOR="#009900" class="grass">
+         <A HREF="index.html"><FONT COLOR="#FFFFFF">Ritorna al tracciato</FONT></A>
+      </TD>
+   </TR>
+</TABLE>
+
+</BODY>
+</HTML>

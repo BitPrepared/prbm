@@ -1,0 +1,326 @@
+<HTML>
+<HEAD>
+   <TITLE>Scheda <?PRBM subst scheda.tipo?></TITLE>
+<link href="edera.css" rel="stylesheet" type="text/css">
+</HEAD>
+
+<STYLE TYPE="text/css">
+   <!--
+      a:link {text-decoration: none}
+      a:active {text-decoration: none}
+      a:visited {text-decoration: none}
+      a:hover {text-decoration: underline; color: #FF0000}
+   -->
+</STYLE>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#009900" VLINK="#009900" ALINK="#009900">
+
+<!-- Intestazione -->
+<TABLE BORDER="0" CELLSPACING="2" CELLPADDING="4" WIDTH="100%">
+   <TR>
+      <TD BGCOLOR="#009900" class="header">
+         <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+           <TR>
+               <TD><IMG ALT="Logo del tipo scheda" BORDER="0" WIDTH="64" HEIGHT="64" HSPACE="8" VSPACE="8" SRC="<?PRBM subst scheda.ico.src?>"></TD>
+               <TD><FONT FACE="Verdana, Arial, Helvetica, sans-serif" COLOR="#FFFFFF" SIZE="+4"><I><B><?PRBM subst scheda.tipo?></B></I></FONT></TD>
+            </TR>
+         </TABLE>
+      </TD>
+   </TR>
+</TABLE>
+
+<!-- Corpo della scheda -->
+<TABLE BORDER="0" CELLSPACING="2" CELLPADDING="16" WIDTH="100%">
+  <TR> 
+    <!-- Inizio colonna di sinistra -->
+    <TD WIDTH="30%" ALIGN="CENTER" VALIGN="TOP" BGCOLOR="#999900" class="tabella"> 
+      <?PRBM if scheda.immagine?>
+      <P><IMG SRC="<?PRBM subst scheda.immagine.src?>" ALT="<?PRBM subst scheda.didascalia?>" BORDER="0" <?PRBM calc_dim scheda.immagine.dimensioni(240, 192)?>><BR>
+        <FONT SIZE="-1">
+        <?PRBM subst scheda.didascalia?>
+        </FONT></P>
+      <?PRBM endif scheda.immagine?>
+      <center>
+        <?PRBM if scheda.audio?>
+        <a href="<?PRBM subst scheda.audio.src?>"><img src="immagini/audio.gif" border=0></a> 
+        <?PRBM endif scheda.audio?>
+        <?PRBM if scheda.video?>
+        <a href="<?PRBM subst scheda.video.src?>"><img src="immagini/video.gif" border=0></a> 
+        <?PRBM endif scheda.video?>
+        &nbsp;</center></TD>
+    <!-- Fine colonna di sinistra -->
+    <!-- Inizio colonna di destra -->
+    <TD WIDTH="70%" rowspan="2" VALIGN="TOP"> 
+      <!-- Tabella per Titolo -->
+      <TABLE BORDER="0" CELLPADDING="0" WIDTH="100%">
+        <!-- Linea Titolo -->
+        <TR>
+          <TD class="grass"> <FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="+2">
+            <?PRBM subst scheda.didascalia?>
+            </FONT><BR> <HR WIDTH="100%" COLOR="#009900" NOSHADE ALIGN="LEFT"> 
+          </TD>
+        </TR>
+        <!-- Linea Data e Ora rilevazione -->
+        <?PRBM if scheda.dataora?>
+        <TR>
+          <TD ALIGN="RIGHT" class="grass"> <FONT SIZE="-1"><B>
+            <?PRBM subst scheda.dataora.value?>
+            </B></FONT> </TD>
+        </TR>
+        <?PRBM endif scheda.dataora?>
+      </TABLE>
+      <!-- Tabella per i vari elementi di testo -->
+      <TABLE BORDER="0" CELLPADDING="8" CELLSPACING="4">
+        <?PRBM if scheda.temperatura?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Temperatura<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.temperatura.value?>
+            °C</TD>
+        </TR>
+        <?PRBM endif scheda.temperatura?>
+        <?PRBM if scheda.umidita?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Umidit&agrave;<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.umidita.value?>
+            %</TD>
+        </TR>
+        <?PRBM endif scheda.umidita?>
+        <?PRBM if scheda.pressione?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Pressione<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.pressione.value?>
+            mBar</TD>
+        </TR>
+        <?PRBM endif scheda.pressione?>
+        <?PRBM if scheda.dirVento?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Vento - direzione<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.dirVento.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.dirVento?>
+        <?PRBM if scheda.intVento?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Vento - velocit&agrave;<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.intVento.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.intVento?>
+        <?PRBM if scheda.intPioggia?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Pioggia - 
+            intensit&agrave;<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.intPioggia.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.intPioggia?>
+        <?PRBM if scheda.torbPioggia?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Pioggia - 
+            torbidit&agrave; dell'acqua<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.torbPioggia.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.torbPioggia?>
+        <?PRBM if scheda.phPioggia?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Pioggia - 
+            PH dell'acqua<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.phPioggia.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.phPioggia?>
+        <?PRBM if scheda.intNeve?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Neve - intensit&agrave;<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.intNeve.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.intNeve?>
+        <?PRBM if scheda.tipoNeve?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Neve - tipo 
+            del fiocco<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.tipoNeve.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.tipoNeve?>
+        <?PRBM if scheda.torbNeve?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Neve - torbidit&agrave 
+            dell'acqua disciolta<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.torbNeve.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.torbNeve?>
+        <?PRBM if scheda.phNeve?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Neve - PH 
+            dell'acqua disciolta<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.phNeve.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.phNeve?>
+        <?PRBM if scheda.intGrandine?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Grandine - 
+            intensit&agrave;<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.intGrandine.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.intGrandine?>
+        <?PRBM if scheda.diamGrandine?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Grandine - 
+            Diametro medio dei chicchi<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.diamGrandine.value?>
+            cm</TD>
+        </TR>
+        <?PRBM endif scheda.diamGrandine?>
+        <?PRBM if scheda.torbGrandine?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Grandine - 
+            torbidit&agrave; dell'acqua disciolta<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.torbGrandine.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.torbGrandine?>
+        <?PRBM if scheda.phGrandine?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Grandine - 
+            PH dell'acqua disciolta<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.phGrandine.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.phGrandine?>
+        <?PRBM if scheda.angSole?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Sole - angolazione 
+            rispetto al piano orizzontale<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.angSole.value?>
+            °</TD>
+        </TR>
+        <?PRBM endif scheda.angSole?>
+        <?PRBM if scheda.posSole?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Sole - posizione 
+            al momento del rilievo<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.posSole.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.posSole?>
+        <?PRBM if scheda.anomSole?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Sole - eventuali 
+            "anomalie" (eclissi, ecc.)<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.anomSole.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.anomSole?>
+        <?PRBM if scheda.visNebbia?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Nebbia - visibilit&agrave; 
+            media<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.visNebbia.value?>
+            m</TD>
+        </TR>
+        <?PRBM endif scheda.visNebbia?>
+        <?PRBM if scheda.tipoNebbia?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Nebbia - Tipo 
+            di formazione (Nebbia, nuvole, evaporazione, ecc.)<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.tipoNebbia.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.tipoNebbia?>
+        <?PRBM if scheda.tipoNubi?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Nubi - tipo<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.tipoNubi.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.tipoNubi?>
+        <?PRBM if scheda.velocNubi?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Nubi - velocit&agrave; 
+            di spostamento e direzione<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.velocNubi.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.velocNubi?>
+        <?PRBM if scheda.eventi?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Eventi particolari 
+            (trombe d'aria, tornadi, cicloni, tempeste, bufere, ecc.)<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.eventi.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.eventi?>
+      </TABLE>
+      <!-- Fine colonna di destra -->
+    </TD>
+  </TR>
+  <TR>
+    <TD VALIGN="TOP" ALIGN="CENTER">&nbsp;</TD>
+  </TR>
+</TABLE>
+
+<!-- Barra dei comandi inferiore -->
+<TABLE CELLSPACING="2" CELLPADDING="4" BORDER="0" WIDTH="100%">
+   <TR>
+      <TD ALIGN="CENTER" BGCOLOR="#009900" class="grass">
+         <A HREF="index.html"><FONT COLOR="#FFFFFF">Ritorna al tracciato</FONT></A>
+      </TD>
+   </TR>
+</TABLE>
+
+</BODY>
+</HTML>

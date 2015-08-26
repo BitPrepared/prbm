@@ -1,0 +1,178 @@
+<HTML>
+<HEAD>
+   <TITLE>Scheda <?PRBM subst scheda.tipo?></TITLE>
+<link href="edera.css" rel="stylesheet" type="text/css">
+</HEAD>
+
+<STYLE TYPE="text/css">
+   <!--
+      a:link {text-decoration: none}
+      a:active {text-decoration: none}
+      a:visited {text-decoration: none}
+      a:hover {text-decoration: underline; color: #FF0000}
+   -->
+</STYLE>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#009900" VLINK="#009900" ALINK="#009900">
+
+<!-- Intestazione -->
+<TABLE BORDER="0" CELLSPACING="2" CELLPADDING="4" WIDTH="100%">
+   <TR>
+      <TD BGCOLOR="#009900" class="header">
+         <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+           <TR>
+               <TD><IMG ALT="Logo del tipo scheda" BORDER="0" WIDTH="64" HEIGHT="64" HSPACE="8" VSPACE="8" SRC="<?PRBM subst scheda.ico.src?>"></TD>
+               <TD><FONT FACE="Verdana, Arial, Helvetica, sans-serif" COLOR="#FFFFFF" SIZE="+4"><I><B><?PRBM subst scheda.tipo?></B></I></FONT></TD>
+            </TR>
+         </TABLE>
+      </TD>
+   </TR>
+</TABLE>
+
+<!-- Corpo della scheda -->
+<TABLE BORDER="0" CELLSPACING="2" CELLPADDING="16" WIDTH="100%">
+  <TR> 
+    <!-- Inizio colonna di sinistra -->
+    <TD WIDTH="30%" ALIGN="CENTER" VALIGN="TOP" BGCOLOR="#FFCC66" class="tabella"> 
+      <?PRBM if scheda.immagine?>
+      <P><IMG SRC="<?PRBM subst scheda.immagine.src?>" ALT="<?PRBM subst scheda.didascalia?>" BORDER="0" <?PRBM calc_dim scheda.immagine.dimensioni(240, 192)?>><BR>
+        <FONT SIZE="-1">
+        <?PRBM subst scheda.didascalia?>
+        </FONT></P>
+      <?PRBM endif scheda.immagine?>
+         <?PRBM if scheda.imgerbario?>  
+         <P><IMG SRC="<?PRBM subst scheda.imgerbario.src?>" BORDER=0 <?PRBM calc_dim scheda.imgerbario.dimensioni(240, 192)?>><BR>
+         <FONT SIZE=-1>Immagine per l'erbario</FONT></P>
+         <?PRBM endif scheda.imgerbario?>
+      <?PRBM if scheda.video?>
+      <center>
+        <a href="<?PRBM subst scheda.video.src?>"><img src="immagini/video.gif" border=0></a>
+      </center>
+      <?PRBM endif scheda.video?>
+      &nbsp; </TD>
+    <!-- Fine colonna di sinistra -->
+    <!-- Inizio colonna di destra -->
+    <TD WIDTH="70%" rowspan="2" VALIGN="TOP"> 
+      <!-- Tabella per Titolo -->
+      <TABLE BORDER="0" CELLPADDING="0" WIDTH="100%">
+        <!-- Linea Titolo -->
+        <TR>
+          <TD class="grass"> <FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="+2">
+            <?PRBM subst scheda.didascalia?>
+            </FONT><BR> <HR WIDTH="100%" COLOR="#009900" NOSHADE ALIGN="LEFT"> 
+          </TD>
+        </TR>
+        <!-- Linea Data e Ora rilevazione -->
+        <?PRBM if scheda.dataora?>
+        <TR>
+          <TD ALIGN="RIGHT" class="grass"> <FONT SIZE="-1"><B>
+            <?PRBM subst scheda.dataora.value?>
+            </B></FONT> </TD>
+        </TR>
+        <?PRBM endif scheda.dataora?>
+      </TABLE>
+      <!-- Tabella per i vari elementi di testo -->
+      <TABLE BORDER="0" CELLPADDING="8" CELLSPACING="4">
+        <?PRBM if scheda.nomeComune?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Nome Comune<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.nomeComune.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.nomeComune?>
+        <?PRBM if scheda.nomeScientifico?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Nome Scientifico<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.nomeScientifico.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.nomeScientifico?>
+        <?PRBM if scheda.desFiore?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Descrizione 
+            del Fiore<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.desFiore.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.desFiore?>
+        <?PRBM if scheda.nPetali?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Numero Petali<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.nPetali.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.nPetali?>
+        <?PRBM if scheda.desFoglia?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Descrizione 
+            della Foglia<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.desFoglia.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.desFoglia?>
+        <?PRBM if scheda.altezza?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Altezza Media<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.altezza.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.altezza?>
+        <?PRBM if scheda.habitat?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Habitat tipico<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.habitat.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.habitat?>
+        <?PRBM if scheda.distribuzione?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Distribuzione<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.distribuzione.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.distribuzione?>
+        <?PRBM if scheda.curiosita?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Curiosit&agrave;<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.curiosita.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.curiosita?>
+      </TABLE>
+      <!-- Fine colonna di destra -->
+    </TD>
+  </TR>
+  <TR>
+    <TD ALIGN="CENTER" VALIGN="TOP">&nbsp;</TD>
+  </TR>
+</TABLE>
+
+<!-- Barra dei comandi inferiore -->
+<TABLE CELLSPACING="2" CELLPADDING="4" BORDER="0" WIDTH="100%">
+   <TR>
+      <TD ALIGN="CENTER" BGCOLOR="#009900" class="grass">
+         <A HREF="index.html"></A><FONT COLOR="#FFFFFF">Ritorna al tracciato</FONT></A>
+      </TD>
+   </TR>
+</TABLE>
+
+</BODY>
+</HTML>

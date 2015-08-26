@@ -1,0 +1,235 @@
+<HTML>
+<HEAD>
+   <TITLE>Scheda <?PRBM subst scheda.tipo?></TITLE>
+<link href="edera.css" rel="stylesheet" type="text/css">
+</HEAD>
+
+<STYLE TYPE="text/css">
+   <!--
+      a:link {text-decoration: none}
+      a:active {text-decoration: none}
+      a:visited {text-decoration: none}
+      a:hover {text-decoration: underline; color: #FF0000}
+   -->
+</STYLE>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#009900" VLINK="#009900" ALINK="#009900">
+
+<!-- Intestazione -->
+<TABLE BORDER="0" CELLSPACING="2" CELLPADDING="4" WIDTH="100%">
+   <TR>
+      <TD BGCOLOR="#009900" class="header">
+         <TABLE BORDER="0" CELLSPACING="0" CELLPADDING="0">
+           <TR>
+               <TD><IMG ALT="Logo del tipo scheda" BORDER="0" WIDTH="64" HEIGHT="64" HSPACE="8" VSPACE="8" SRC="<?PRBM subst scheda.ico.src?>"></TD>
+               <TD><FONT FACE="Verdana, Arial, Helvetica, sans-serif" COLOR="#FFFFFF" SIZE="+4"><I><B><?PRBM subst scheda.tipo?></B></I></FONT></TD>
+            </TR>
+         </TABLE>
+      </TD>
+   </TR>
+</TABLE>
+
+<!-- Corpo della scheda -->
+<TABLE BORDER="0" CELLSPACING="2" CELLPADDING="16" WIDTH="100%">
+  <TR> 
+    <!-- Inizio colonna di sinistra -->
+    <TD WIDTH="30%" height="356" ALIGN="CENTER" VALIGN="TOP" BGCOLOR="#999900" class="tabella"> 
+      <?PRBM if scheda.immagine?>
+      <P><IMG SRC="<?PRBM subst scheda.immagine.src?>" ALT="<?PRBM subst scheda.didascalia?>" BORDER="0" <?PRBM calc_dim scheda.immagine.dimensioni(240, 192)?>><BR>
+        <FONT SIZE="-1">
+        <?PRBM subst scheda.didascalia?>
+        </FONT></P>
+      <?PRBM endif scheda.immagine?>
+      <center>
+        <?PRBM if scheda.video?>
+        <a href="<?PRBM subst scheda.video.src?>"><img src="immagini/video.gif" border=0></a> 
+        <?PRBM endif scheda.video?>
+        &nbsp;</center></TD>
+    <!-- Fine colonna di sinistra -->
+    <!-- Inizio colonna di destra -->
+    <TD WIDTH="70%" rowspan="2" VALIGN="TOP"> 
+      <!-- Tabella per Titolo -->
+      <TABLE BORDER="0" CELLPADDING="0" WIDTH="100%">
+        <!-- Linea Titolo -->
+        <TR>
+          <TD class="grass"> <FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="+2">
+            <?PRBM subst scheda.didascalia?>
+            </FONT><BR> <HR WIDTH="100%" COLOR="#009900" NOSHADE ALIGN="LEFT"> 
+          </TD>
+        </TR>
+        <!-- Linea Data e Ora rilevazione -->
+        <?PRBM if scheda.dataora?>
+        <TR>
+          <TD ALIGN="RIGHT" class="grass"> <FONT SIZE="-1"><B>
+            <?PRBM subst scheda.dataora.value?>
+            </B></FONT> </TD>
+        </TR>
+        <?PRBM endif scheda.dataora?>
+      </TABLE>
+      <!-- Tabella per i vari elementi di testo -->
+      <TABLE BORDER="0" CELLPADDING="8" CELLSPACING="4">
+        <?PRBM if scheda.denominazione?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Denominazione<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.denominazione.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.denominazione?>
+        <?PRBM if scheda.descrizione?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Descrizione<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.descrizione.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.descrizione?>
+        <?PRBM if scheda.comune?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Comune e provincia 
+            in cui è dislocato<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.comune.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.comune?>
+        <?PRBM if scheda.tipoRilevanza?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Tipo di rilevanza<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.tipoRilevanza.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.tipoRilevanza?>
+        <?PRBM if scheda.proprieta?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Propriet&agrave; 
+            attuale<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.proprieta.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.proprieta?>
+        <?PRBM if scheda.uso?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Uso attuale<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.uso.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.uso?>
+        <?PRBM if scheda.stato?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Stato di manutenzione<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.stato.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.stato?>
+        <?PRBM if scheda.fattoCostruire?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Monumento 
+            - fatto costruire da...<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.fattoCostruire.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.fattoCostruire?>
+        <?PRBM if scheda.percheCostruire?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Monumento 
+            - perch&egrave; lo fece costruire<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.percheCostruire.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.percheCostruire?>
+        <?PRBM if scheda.dataCostruzione?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Monumento 
+            - data della prima costruzione<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.dataCostruzione.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.dataCostruzione?>
+        <?PRBM if scheda.materiali?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Monumento 
+            - materiali usati per la costruzione<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.materiali.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.materiali?>
+        <?PRBM if scheda.opere?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Monumento 
+            - opere d'arte presenti<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.opere.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.opere?>
+        <?PRBM if scheda.dataAvvenimento?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Luogo Storico 
+            - data del principale avvenimento<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.dataAvvenimento.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.dataAvvenimento?>
+        <?PRBM if scheda.percheAvvenimento?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Luogo Storico 
+            - da che cosa &egrave; scaturito l'avvenimento<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.percheAvvenimento.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.percheAvvenimento?>
+        <?PRBM if scheda.raccontoAvvenimento?>
+        <TR> 
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="bullet.gif"></TD>
+          <TD><B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Luogo Storico 
+            - racconto dell'avvenimento<BR>
+            </FONT></B> 
+            <?PRBM subst scheda.raccontoAvvenimento.value?>
+          </TD>
+        </TR>
+        <?PRBM endif scheda.raccontoAvvenimento?>
+      </TABLE>
+      <!-- Fine colonna di destra -->
+    </TD>
+  </TR>
+  <TR>
+    <TD VALIGN="TOP" ALIGN="CENTER">&nbsp;</TD>
+  </TR>
+</TABLE>
+
+<!-- Barra dei comandi inferiore -->
+<TABLE CELLSPACING="2" CELLPADDING="4" BORDER="0" WIDTH="100%">
+   <TR>
+      <TD ALIGN="CENTER" BGCOLOR="#009900" class="grass">
+         <A HREF="index.html"><FONT COLOR="#FFFFFF">Ritorna al tracciato</FONT></A>
+      </TD>
+   </TR>
+</TABLE>
+
+</BODY>
+</HTML>

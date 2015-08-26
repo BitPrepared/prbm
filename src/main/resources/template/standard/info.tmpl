@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+   <TITLE>Percorso Rettificato Belga - Dati Generali</TITLE>
+</HEAD>
+<STYLE TYPE="text/css">
+   <!--
+      a:link {text-decoration: none}
+      a:active {text-decoration: none}
+      a:visited {text-decoration: none}
+      a:hover {text-decoration: underline; color: #FF0000}
+   -->
+</STYLE>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000" LINK="#990000" VLINK="#990000" ALINK="#990000">
+
+<!--Intestazione--> 
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="4" BGCOLOR="#990000" WIDTH="100%">
+  <TR> 
+    <TD WIDTH="100%" ALIGN=CENTER><FONT FACE="Verdana, Arial, Helvetica, sans-serif" COLOR="#FFFFFF" SIZE="+4"><I><B>Dati Generali</B></I></FONT></TD>
+  </TR>
+</TABLE>
+
+<!--Corpo della scheda-->
+<TABLE BORDER="0" CELLSPACING="0" CELLPADDING="8" WIDTH="100%">
+  <TR>
+
+    <!-- Inizio colonna di sinistra -->
+    <TD BGCOLOR="#FFCCCC" WIDTH="20%" VALIGN="TOP" ALIGN="CENTER">&nbsp;</TD>
+
+    <!-- Inizio colonna di destra -->
+    <TD WIDTH="80%" VALIGN="TOP">
+
+      <P><FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="+2"><?PRBM subst percorso.titolo?></FONT><br>
+      <FONT FACE="Verdana, Arial, Helvetica, sans-serif" SIZE="+1"><?PRBM subst percorso.luogo?></FONT></P>
+      <HR WIDTH="100%" COLOR="#990000" NOSHADE>
+      <P ALIGN="RIGHT"><FONT SIZE="-1"><B><?PRBM subst percorso.dataora?></B></FONT></P>
+
+      <!--Tabella per i vari elementi di testo-->
+      <TABLE BORDER="0" CELLPADDING="4" CELLSPACING="0">
+        <?PRBM if percorso.autori?>
+        <TR>
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="immagini/campo.gif"></TD>
+          <TD>
+            <B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Autori</FONT></B><BR>
+            <?PRBM subst percorso.autori.value?>
+          </TD>
+        </TR>
+	<?PRBM endif percorso.autori?>
+        <?PRBM if percorso.note?>
+        <TR>
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="immagini/campo.gif"></TD>
+          <TD>
+            <B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Note</FONT></B><BR>
+            <?PRBM subst percorso.note.value?>
+          </TD>
+        </TR>
+	<?PRBM endif percorso.note?>
+        <?PRBM if percorso.dir?>
+        <TR>
+          <TD VALIGN="TOP"><IMG WIDTH="32" HEIGHT="32" SRC="immagini/campo.gif"></TD>
+          <TD>
+            <B><FONT FACE="Verdana, Arial, Helvetica, sans-serif">Directory di Output</FONT></B><BR>
+            <?PRBM subst percorso.dir.value?>
+          </TD>
+        </TR>
+	<?PRBM endif percorso.dir?>
+      </TABLE>
+    </TD>
+  </TR>
+</TABLE>
+
+<!--Barra dei comandi inferiore-->
+<TABLE CELLSPACING="0" CELLPADDING="4" BORDER="0" WIDTH="100%" BGCOLOR="#FFCCCC">
+  <TR>
+    <TD ALIGN="CENTER"><FONT COLOR="#FFFFFF">
+      <A HREF="index.html">Torna al tracciato</A>
+    </FONT></TD>
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>
