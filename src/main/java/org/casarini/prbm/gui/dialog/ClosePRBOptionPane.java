@@ -48,7 +48,7 @@ public class ClosePRBOptionPane extends Dialog implements ActionListener {
         
         String[] msgLines = message.split("\\n");
 
-        // TODO: il layout è da rifare in maniera più flessibile
+        // TODO: il layout a' da rifare in maniera pia' flessibile
         setLayout(null);
         addNotify();
         setSize(getInsets().left + getInsets().right + 379, getInsets().top

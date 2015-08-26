@@ -23,6 +23,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import org.casarini.prbm.gui.PRB;
 import org.casarini.prbm.gui.dialog.DialogEditAlbero;
@@ -36,6 +38,7 @@ import org.casarini.prbm.gui.dialog.DialogEditMeteo;
 import org.casarini.prbm.gui.dialog.DialogEditMonumento;
 import org.casarini.prbm.gui.dialog.DialogEditPaesaggio;
 import org.casarini.prbm.gui.dialog.DialogEditStep;
+import org.casarini.prbm.gui.dialog.TemplateBox;
 import org.casarini.prbm.model.Albero;
 import org.casarini.prbm.model.AmbienteNaturale;
 import org.casarini.prbm.model.Curiosita;
@@ -107,7 +110,7 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
     //gestione menu popup
     String[] reslabel = new String[]{"Modifica","Cancella","Copia","Incolla Prima","Incolla Dopo"};
     String[] rescommand = new String[]{"rmodifica","rcancella","rcopia","rincolla_p","rincolla_d"};
-    String[] residlabel = new String[]{"Simbolo Paesaggio","Fiore/Erba","Albero/Arbusto","Fauna","Ambiente Naturale","Meteo","Monumento/Luogo Storico","Intervista","Fatto di Cronaca","Curiosità/Osservazione"};
+    String[] residlabel = new String[]{"Simbolo Paesaggio","Fiore/Erba","Albero/Arbusto","Fauna","Ambiente Naturale","Meteo","Monumento/Luogo Storico","Intervista","Fatto di Cronaca","Curiosita'/Osservazione"};
     String[] residcommand = new String[]{"PAE","FIO","ALB","FAU","AMB","MET","MON","INT","CRO","CUR"};
     String[] passolabel = new String[]{"Modifica","Cancella","Elimina tutte le schede"};
     String[] passocommand = new String[]{"modifica","cancella","elimina tutte le risorse"};
@@ -280,7 +283,7 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
                 m_Gbuffer.drawString(""+(i+1),m_inithspace-15,my);
 
             m_Gbuffer.setFont(m_FontNormal);
-            m_Gbuffer.drawString(""+passo.azimut+"°N",m_inithspace+2*m_size_col+2,my-2);
+            m_Gbuffer.drawString(""+passo.azimut+"a'N",m_inithspace+2*m_size_col+2,my-2);
             m_Gbuffer.drawString(""+passo.metri+" metri",m_inithspace+2*m_size_col+2,my-17);
             m_Gbuffer.drawString(""+passo.tempo+" min",m_inithspace+2*m_size_col+2,my-32);
         }
@@ -309,13 +312,13 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
 
         g.setFont(m_FontNormal);
         g.clearRect(m_inithspace+2*m_size_col+1,my-HCOLDEF-1,m_size_col_centre-2,HCOLDEF);
-        g.drawString(""+passo.azimut+"°N",m_inithspace+2*m_size_col+2,my-2);
+        g.drawString(""+passo.azimut+"a'N",m_inithspace+2*m_size_col+2,my-2);
         g.drawString(""+passo.metri+" metri",m_inithspace+2*m_size_col+2,my-17);
         g.drawString(""+passo.tempo+" min",m_inithspace+2*m_size_col+2,my-32);
 
         m_Gbuffer.setFont(m_FontNormal);
         m_Gbuffer.clearRect(m_inithspace+2*m_size_col+1,my-HCOLDEF-1,m_size_col_centre-2,HCOLDEF);
-        m_Gbuffer.drawString(""+passo.azimut+"°N",m_inithspace+2*m_size_col+2,my-2);
+        m_Gbuffer.drawString(""+passo.azimut+"a'N",m_inithspace+2*m_size_col+2,my-2);
         m_Gbuffer.drawString(""+passo.metri+" metri",m_inithspace+2*m_size_col+2,my-17);
         m_Gbuffer.drawString(""+passo.tempo+" min",m_inithspace+2*m_size_col+2,my-32);
     }
@@ -894,7 +897,7 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
 		}
         else if(command.equals("CUR_P"))
 		{
-            coord=addNewResource(9,"Curiosità/Osservazione",true);
+            coord=addNewResource(9,"Curiosita'/Osservazione",true);
 			rs=dt.getResource(coord.sel_col,coord.sel_passo,coord.sel_res);
             DialogEditCuriosita editCuriosita;
             editCuriosita = new DialogEditCuriosita(parent,rs);
@@ -1005,7 +1008,7 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
 		}
         else if(command.equals("CUR_D"))
 		{
-            coord=addNewResource(9,"Curiosità/Osservazione",false);
+            coord=addNewResource(9,"Curiosita'/Osservazione",false);
 			rs=dt.getResource(coord.sel_col,coord.sel_passo,coord.sel_res);
             DialogEditCuriosita editCuriosita;
             editCuriosita = new DialogEditCuriosita(parent,rs);
@@ -1148,9 +1151,17 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
         else
             ext=new String(".htm");
         
+        
+        // posizione corrente del jar
+        String home = System.getProperty("user.dir"); 
+		try {
+			File homefile = new File(PRB.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+			home = homefile.getAbsolutePath();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+        
         //imposto directory di output
-        File homefile = new File("");
-        String home=homefile.getAbsolutePath();
         String dir;
         if(param.dir.length()!=0)
         	dir=param.dir;
@@ -1173,109 +1184,40 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
 		System.out.println("TARGET: "+dir);
 
         //preparo la dir di output
-        File dirguida=new File(dir+"/guida");
-        dirguida.mkdir();
-		File[] list=(new File("finale/guida")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/guida/"+list[i].getName(),dir+"/guida/"+list[i].getName());
-
-        File dirguidaicone=new File(dir+"/guida/icone");
-        dirguidaicone.mkdir();
-		list=(new File("finale/guida/icone")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/guida/icone/"+list[i].getName(),dir+"/guida/icone/"+list[i].getName());
-
-        File dirstdimg=new File(dir+"/immagini");
-        dirstdimg.mkdir();
-		list=(new File("finale/immagini")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/immagini/"+list[i].getName(),dir+"/immagini/"+list[i].getName());
-
-        File diricone=new File(dir+"/icone");
-        diricone.mkdir();
-		list=(new File("finale/icone")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/icone/"+list[i].getName(),dir+"/icone/"+list[i].getName());
-
-        File diriconealb=new File(dir+"/icone/alb");
-        diriconealb.mkdir();
-		list=(new File("finale/icone/alb")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/icone/alb/"+list[i].getName(),dir+"/icone/alb/"+list[i].getName());
-
-        File diriconeamb=new File(dir+"/icone/amb");
-        diriconeamb.mkdir();
-		list=(new File("finale/icone/amb")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/icone/amb/"+list[i].getName(),dir+"/icone/amb/"+list[i].getName());
-
-        File diriconecro=new File(dir+"/icone/cro");
-        diriconecro.mkdir();
-		list=(new File("finale/icone/cro")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/icone/cro/"+list[i].getName(),dir+"/icone/cro/"+list[i].getName());
-
-        File diriconecur=new File(dir+"/icone/cur");
-        diriconecur.mkdir();
-		list=(new File("finale/icone/cur")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/icone/cur/"+list[i].getName(),dir+"/icone/cur/"+list[i].getName());
-
-        File diriconefau=new File(dir+"/icone/fau");
-        diriconefau.mkdir();
-		list=(new File("finale/icone/fau")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/icone/fau/"+list[i].getName(),dir+"/icone/fau/"+list[i].getName());
-
-        File diriconefio=new File(dir+"/icone/fio");
-        diriconefio.mkdir();
-		list=(new File("finale/icone/fio")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/icone/fio/"+list[i].getName(),dir+"/icone/fio/"+list[i].getName());
-
-        File diriconeint=new File(dir+"/icone/int");
-        diriconeint.mkdir();
-		list=(new File("finale/icone/int")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/icone/int/"+list[i].getName(),dir+"/icone/int/"+list[i].getName());
-
-        File diriconemet=new File(dir+"/icone/met");
-        diriconemet.mkdir();
-		list=(new File("finale/icone/met")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/icone/met/"+list[i].getName(),dir+"/icone/met/"+list[i].getName());
-
-        File diriconemon=new File(dir+"/icone/mon");
-        diriconemon.mkdir();
-		list=(new File("finale/icone/mon")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("finale/icone/mon/"+list[i].getName(),dir+"/icone/mon/"+list[i].getName());
-
-		File dirpaesaggi=new File(dir+"/paesaggi");
-        dirpaesaggi.mkdir();
-		list=(new File("paesaggi")).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile("paesaggi/"+list[i].getName(),dir+"/paesaggi/"+list[i].getName());
+		creaOutputDir(home, dir,"guida");
+        creaOutputDir(home, dir,"guida/icone");
+        creaOutputDir(home, dir,"immagini");
+        creaOutputDir(home, dir,"icone");
+        creaOutputDir(home, dir,"icone/alb");
+        creaOutputDir(home, dir,"icone/amb");
+        creaOutputDir(home, dir,"icone/cro");
+        creaOutputDir(home, dir,"icone/cur");
+        creaOutputDir(home, dir,"icone/fau");
+        creaOutputDir(home, dir,"icone/fio");
+        creaOutputDir(home, dir,"icone/int");
+        creaOutputDir(home, dir,"icone/met");
+        creaOutputDir(home, dir,"icone/mon");
+		creaOutputDir(home, dir,"paesaggi");
 
         //copio tutti i file della directory del template tranne quelli con estensione .tmpl
-        list=(new File("template/"+template)).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile() && !list[i].getName().endsWith(".tmpl"))
-        		DiskUtil.copyFile("template/"+template+"/"+list[i].getName(),dir+"/"+list[i].getName());
+        
+		File[] list;
+        URL templateInterno = TemplateBox.class.getResource("/template");
+        File fileCheckInterno = new File(templateInterno.getPath() + File.separator + template);
+		if( fileCheckInterno.exists() ) {
+			home = templateInterno.getPath();
+        	list = fileCheckInterno.listFiles();	
+        } else {
+        	File fileCheckEsterno = new File(home + File.separator + "template" + File.separator + template);
+        	list = fileCheckEsterno.listFiles();
+        }
+        
+        for(int i=0;i<list.length;i++) {
+			File fileCorrente = list[i];
+			System.out.println("Analizzo "+fileCorrente.getAbsolutePath());
+			if(fileCorrente.isFile() && !fileCorrente.getName().endsWith(".tmpl"))
+        		DiskUtil.copyFile(fileCorrente.getAbsolutePath(),dir+File.separator+fileCorrente.getName());
+		}
 
         String[] ncols={"SL","SV","DV","DL"};
         for(int i=0;i<m_row;i++)
@@ -1287,57 +1229,58 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
                     if(start.length()<2)
                     	start="0"+start;
                     Resource r=dt.getResource(j,i,k);
+                    String dest = home + File.separator + template;
                     switch(r.type)
                     {
                         case 0:
                             Scheda s0=(Scheda)r.scheda;
                             s0.html=start+ncols[j]+"PAE"+k+ext;
-                            s0.toHTML(dir+"/"+s0.html,template);
+                            s0.toHTML(dir+"/"+s0.html,dest);
                             break;
                         case 1:
                             Fiore s1=(Fiore)r.scheda;
                             s1.html=start+ncols[j]+"FIO"+k+ext;
-                            s1.toHTML(dir+"/"+s1.html,template);
+                            s1.toHTML(dir+"/"+s1.html,dest);
                             break;
                         case 2:
                             Albero s2=(Albero)r.scheda;
                             s2.html=start+ncols[j]+"ALB"+k+ext;
-                            s2.toHTML(dir+"/"+s2.html,template);
+                            s2.toHTML(dir+"/"+s2.html,dest);
                             break;
                         case 3:
                             Fauna s3=(Fauna)r.scheda;
                             s3.html=start+ncols[j]+"FAU"+k+ext;
-                            s3.toHTML(dir+"/"+s3.html,template);
+                            s3.toHTML(dir+"/"+s3.html,dest);
                             break;
                         case 4:
                             AmbienteNaturale s4=(AmbienteNaturale)r.scheda;
                             s4.html=start+ncols[j]+"AMB"+k+ext;
-                            s4.toHTML(dir+"/"+s4.html,template);
+                            s4.toHTML(dir+"/"+s4.html,dest);
                             break;
                         case 5:
                             Meteo s5=(Meteo)r.scheda;
                             s5.html=start+ncols[j]+"MET"+k+ext;
-                            s5.toHTML(dir+"/"+s5.html,template);
+                            s5.toHTML(dir+"/"+s5.html,dest);
                             break;
                         case 6:
                             Monumento s6=(Monumento)r.scheda;
                             s6.html=start+ncols[j]+"MON"+k+ext;
-                            s6.toHTML(dir+"/"+s6.html,template);
+                            s6.toHTML(dir+"/"+s6.html,dest);
                             break;
                         case 7:
                             Intervista s7=(Intervista)r.scheda;
                             s7.html=start+ncols[j]+"INT"+k+ext;
-                            s7.toHTML(dir+"/"+s7.html,template);
+                            s7.toHTML(dir+"/"+s7.html,dest);
                             break;
                         case 8:
                             Fatto s8=(Fatto)r.scheda;
                             s8.html=start+ncols[j]+"CRO"+k+ext;
-                            s8.toHTML(dir+"/"+s8.html,template);
+                            s8.toHTML(dir+"/"+s8.html,dest);
                             break;
                         case 9:
                             Curiosita s9=(Curiosita)r.scheda;
                             s9.html=start+ncols[j]+"CUR"+k+ext;
-                            s9.toHTML(dir+"/"+s9.html,template);
+                            s9.toHTML(dir+"/"+s9.html,dest);
                             break;
                     }
                 }
@@ -1373,7 +1316,7 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
         }
         else
             nodes.addElement(new PRBMParserNode('I',"percorso.dir", null, 0, null));
-        parser = new PRBMParser("template" + File.separator + template + File.separatorChar + "info.tmpl", dir + "/info.html", nodes);
+        parser = new PRBMParser(home + File.separator + template + File.separator + "info.tmpl", dir + "/info.html", nodes);
         parser.parse();
 
         //INDEX.HTML
@@ -1430,9 +1373,20 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
             }
         }
         nodes.addElement(new PRBMParserNode('R',"traccia",null,m_row,tnodes));
-        parser = new PRBMParser("template" + File.separator + template + File.separator + "index.tmpl", dir+"/index.html", nodes);
+        parser = new PRBMParser(home + File.separator + template + File.separator + "index.tmpl", dir+"/index.html", nodes);
         parser.parse();
     }
+
+	private void creaOutputDir(String baseDir, String targetDir, String innerDir) {
+		
+		File[] list;
+		File diricone=new File(targetDir+File.separator+innerDir);
+        diricone.mkdir();
+		list = ( new File(baseDir + File.separator + "finale" + File.separator + innerDir)).listFiles();
+        for(int i=0;i<list.length;i++)
+        	if(list[i].isFile())
+        		DiskUtil.copyFile(baseDir + File.separator + "finale"+File.separator+innerDir+File.separator+list[i].getName(),targetDir+File.separator+innerDir+File.separator+list[i].getName());
+	}
     
     String r_html(Passo passo,int col)
     {

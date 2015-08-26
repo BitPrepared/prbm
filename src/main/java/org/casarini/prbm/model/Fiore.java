@@ -90,7 +90,7 @@ public class Fiore extends Scheda implements java.io.Serializable
 		return (Scheda)s;
 	}
 
-	public void toHTML(String file, String template)
+	public void toHTML(String file, String outputDir)
     {
         String sTipo="Fiore/Erba";
         String sIcoTipo=icona;
@@ -216,7 +216,7 @@ public class Fiore extends Scheda implements java.io.Serializable
         }
         else
             nodes.addElement(new PRBMParserNode('I',"scheda.curiosita", null, 0, null));
-        parser = new PRBMParser("template" + File.separator + template + File.separator + "fiore.tmpl", file, nodes);
+        parser = new PRBMParser(outputDir + File.separator + "fiore.tmpl", file, nodes);
         parser.parse();
 
         if(immagine.length()!=0)

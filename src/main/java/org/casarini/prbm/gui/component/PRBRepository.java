@@ -89,7 +89,7 @@ public class PRBRepository extends Canvas implements MouseListener, ActionListen
     String[] residlabel = new String[] { "Simbolo Paesaggio", "Fiore/Erba",
             "Albero/Arbusto", "Fauna", "Ambiente Naturale", "Meteo",
             "Monumento/Luogo Storico", "Intervista", "Fatto di Cronaca",
-            "Curiosità/Osservazione" };
+            "Curiosita'/Osservazione" };
 
     String[] residcommand = new String[] { "PAE", "FIO", "ALB", "FAU", "AMB",
             "MET", "MON", "INT", "CRO", "CUR" };
@@ -529,7 +529,7 @@ public class PRBRepository extends Canvas implements MouseListener, ActionListen
             m_Gbuffer.drawImage(rs.n, 0, pos * HRES, this);
             repaint();
         } else if (command.equals("CUR_P")) {
-            pos = addNewResource(9, "Curiosità/Osservazione", true);
+            pos = addNewResource(9, "Curiosita'/Osservazione", true);
             rs = dr.getResource(pos);
             DialogEditCuriosita editCuriosita;
             editCuriosita = new DialogEditCuriosita(parent.parent, rs);
@@ -622,7 +622,7 @@ public class PRBRepository extends Canvas implements MouseListener, ActionListen
             m_Gbuffer.drawImage(rs.n, 0, pos * HRES, this);
             repaint();
         } else if (command.equals("CUR_D")) {
-            pos = addNewResource(9, "Curiosità/Osservazione", false);
+            pos = addNewResource(9, "Curiosita'/Osservazione", false);
             rs = dr.getResource(pos);
             DialogEditCuriosita editCuriosita;
             editCuriosita = new DialogEditCuriosita(parent.parent, rs);

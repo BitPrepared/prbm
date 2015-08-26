@@ -64,7 +64,7 @@ public class Scheda implements Serializable
 		return s;
 	}
     
-    public void toHTML(String file, String template)
+    public void toHTML(String file, String outputDir)
     {
         String sTipo="Paesaggio";
         String sIcoTipo=icona;
@@ -109,7 +109,7 @@ public class Scheda implements Serializable
             nodes.addElement(new PRBMParserNode('I',"scheda.video", null, 0, null));
         nodes.addElement(new PRBMParserNode('S',"scheda.dataora.value", TimeStamp.toHtml(timestamp), 0, null));
         nodes.addElement(new PRBMParserNode('S',"scheda.note", note, 0, null));
-        parser = new PRBMParser("template" + File.separator + template + File.separator + "paesaggio.tmpl", file, nodes);
+        parser = new PRBMParser(outputDir + File.separator + "paesaggio.tmpl", file, nodes);
         parser.parse();
 
         if(immagine.length()!=0)

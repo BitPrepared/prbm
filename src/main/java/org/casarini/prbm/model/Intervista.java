@@ -102,7 +102,7 @@ public class Intervista extends Scheda implements java.io.Serializable
 		return (Scheda)s;
 	}
     
-    public void toHTML(String file, String template)
+    public void toHTML(String file, String outputDir)
     {
         String sTipo="Intervista";
         String sIcoTipo=icona;
@@ -252,7 +252,7 @@ public class Intervista extends Scheda implements java.io.Serializable
         }
         else
             nodes.addElement(new PRBMParserNode('I',"scheda.trascrizione", null, 0, null));
-        parser = new PRBMParser("template" + File.separator + template + File.separator+ "intervista.tmpl", file, nodes);
+        parser = new PRBMParser(outputDir + File.separator+ "intervista.tmpl", file, nodes);
         parser.parse();
 
         if(immagine.length()!=0)

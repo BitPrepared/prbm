@@ -87,7 +87,7 @@ public class Fatto extends Scheda implements java.io.Serializable
 		return (Scheda)s;
 	}
     
-    public void toHTML(String file, String template)
+    public void toHTML(String file, String outputDir)
     {
         String sTipo="Fatto di Cronaca";
         String sIcoTipo=icona;
@@ -202,7 +202,7 @@ public class Fatto extends Scheda implements java.io.Serializable
         }
         else
             nodes.addElement(new PRBMParserNode('I',"scheda.imparato", null, 0, null));
-        parser = new PRBMParser("template" + File.separator + template + File.separator + "cronaca.tmpl", file, nodes);
+        parser = new PRBMParser(outputDir + File.separator + "cronaca.tmpl", file, nodes);
         parser.parse();
 
         if(immagine.length()!=0)

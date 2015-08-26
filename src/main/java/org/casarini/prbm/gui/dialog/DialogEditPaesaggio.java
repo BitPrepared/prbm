@@ -142,7 +142,7 @@ public class DialogEditPaesaggio extends DefaultDialogEdit
 		tfTitolo.setBounds(getInsets().left + 81,getInsets().top + 39,380,18);
 		tfTitolo.setBackground(Color.yellow);
 		add(tfTitolo);
-		label1 = new java.awt.Label("Proprietà scheda Paesaggio",Label.CENTER);
+		label1 = new java.awt.Label("Proprieta' scheda Paesaggio",Label.CENTER);
 		label1.setBounds(getInsets().left + 7,getInsets().top + 6,453,18);
 		label1.setFont(new Font("Dialog", Font.BOLD, 14));
 		add(label1);
@@ -407,7 +407,7 @@ public class DialogEditPaesaggio extends DefaultDialogEdit
 	    String didascalia;
 	    if((didascalia=tfTitolo.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non pua' essere vuoto.");
 		    d.display();
 		}
 		else if(lIcona.getSelectedIndex() == -1)
@@ -446,7 +446,7 @@ public class DialogEditPaesaggio extends DefaultDialogEdit
 		            rs.scheda.immagine=tfImmagine.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -460,7 +460,7 @@ public class DialogEditPaesaggio extends DefaultDialogEdit
 		            rs.scheda.video=tfVideo.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}

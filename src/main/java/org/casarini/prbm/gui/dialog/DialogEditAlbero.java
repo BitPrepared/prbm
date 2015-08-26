@@ -63,7 +63,7 @@ public class DialogEditAlbero extends DefaultDialogEdit
 		this.setTitle("Modifica scheda Albero/Arbusto");
 		scheda=(Albero)rs.scheda;
 		setBackground(Color.lightGray);
-		XMLDirectoryList dl = new XMLDirectoryList(IconFactory.RESOURCE_DIR + icoDir);
+		XMLDirectoryList dl = new XMLDirectoryList(File.separator+icoDir);
 		icone = dl.list();
 		
 		if(scheda.icona.length()!=0)
@@ -85,12 +85,12 @@ public class DialogEditAlbero extends DefaultDialogEdit
 		fontN=new Font("Dialog", Font.PLAIN, 12);
 		fontB=new Font("Dialog", Font.BOLD, 12);
 
-        icona = IconFactory.getInstance().getImage(scheda.icona);
+        icona = IconFactory.getInstance().getImage(File.separator+scheda.icona);
 
 		setLayout(new BorderLayout(5,5));
 		setVisible(false);
 		setSize(getInsets().left + getInsets().right + 500, getInsets().top + getInsets().bottom + 425);
-		Label label1 = new Label("Proprietà scheda Albero/Arbusto",Label.CENTER);
+		Label label1 = new Label("Proprieta' scheda Albero/Arbusto",Label.CENTER);
 		label1.setFont(new Font("Dialog", Font.BOLD, 14));
 		add("North",label1);
 		
@@ -283,14 +283,14 @@ public class DialogEditAlbero extends DefaultDialogEdit
 		taDistribuzione = new TextArea();
 		taDistribuzione.setBounds(9,99,476,54);
 		panel3.add(taDistribuzione);
-		Label label11 = new Label("Proprietà:");
+		Label label11 = new Label("Proprieta':");
 		label11.setBounds(9,164,81,12);
 		label11.setFont(fontB);
 		panel3.add(label11);
 		taProprieta = new TextArea();
 		taProprieta.setBounds(9,179,476,54);
 		panel3.add(taProprieta);
-		Label label12 = new Label("Curiosità:");
+		Label label12 = new Label("Curiosita':");
 		label12.setBounds(9,244,81,12);
 		label12.setFont(fontB);
 		panel3.add(label12);
@@ -475,19 +475,19 @@ public class DialogEditAlbero extends DefaultDialogEdit
 	    String didascalia,nomeC,desA;
 	    if((didascalia=tfDidascalia.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non pua' essere vuoto.");
 		    d.display();
 		}
 	    else if((nomeC=tfNomeC.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Nome Comune non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Nome Comune non pua' essere vuoto.");
 		    d.display();
 		    if(numlay!=1){lay.first(panel);numlay=1;}
 		    tfNomeC.requestFocus();
 		}
 	    else if((desA=taDesAlbero.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione Albero non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione Albero non pua' essere vuoto.");
 		    d.display();
 		    if(numlay!=1){lay.first(panel);numlay=1;}
 		    taDesAlbero.requestFocus();
@@ -539,7 +539,7 @@ public class DialogEditAlbero extends DefaultDialogEdit
 		            scheda.immagine=tfImmagine.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -553,7 +553,7 @@ public class DialogEditAlbero extends DefaultDialogEdit
 		            scheda.video=tfVideo.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}

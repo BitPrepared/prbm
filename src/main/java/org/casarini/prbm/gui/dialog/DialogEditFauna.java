@@ -63,7 +63,7 @@ public class DialogEditFauna extends DefaultDialogEdit
 		this.setTitle("Modifica scheda Fauna");
 		scheda=(Fauna)rs.scheda;
 		setBackground(Color.lightGray);
-		XMLDirectoryList dl = new XMLDirectoryList(IconFactory.RESOURCE_DIR + icoDir);
+		XMLDirectoryList dl = new XMLDirectoryList(File.separator+icoDir);
 		icone = dl.list();
 		if(scheda.icona.length()!=0)
 		{
@@ -84,12 +84,12 @@ public class DialogEditFauna extends DefaultDialogEdit
 		fontN=new Font("Dialog", Font.PLAIN, 12);
 		fontB=new Font("Dialog", Font.BOLD, 12);
 
-        icona = IconFactory.getInstance().getImage(scheda.icona);
+		icona = IconFactory.getInstance().getImage(File.separator+scheda.icona);
 
 		setLayout(new BorderLayout(5,5));
 		setVisible(false);
 		setSize(getInsets().left + getInsets().right + 500, getInsets().top + getInsets().bottom + 425);
-		Label label1 = new Label("Proprietà scheda Fauna",Label.CENTER);
+		Label label1 = new Label("Proprieta' scheda Fauna",Label.CENTER);
 		label1.setFont(new Font("Dialog", Font.BOLD, 14));
 		add("North",label1);
 		
@@ -329,14 +329,14 @@ public class DialogEditFauna extends DefaultDialogEdit
 		taDistribuzione = new TextArea();
 		taDistribuzione.setBounds(9,87,476,54);
 		panel4.add(taDistribuzione);
-		Label label11 = new Label("Territorialità:");
+		Label label11 = new Label("Territorialita':");
 		label11.setBounds(9,144,81,12);
 		label11.setFont(fontB);
 		panel4.add(label11);
 		taTerritorialita = new TextArea();
 		taTerritorialita.setBounds(9,159,476,54);
 		panel4.add(taTerritorialita);
-		Label label12 = new Label("Curiosità:");
+		Label label12 = new Label("Curiosita':");
 		label12.setBounds(9,216,81,12);
 		label12.setFont(fontB);
 		panel4.add(label12);
@@ -547,21 +547,21 @@ public class DialogEditFauna extends DefaultDialogEdit
 	    String didascalia,nomeC,desA;
 	    if((didascalia=tfDidascalia.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non pua' essere vuoto.");
 		    d.display();
 		    if(numlay!=1){lay.first(panel);numlay=1;}
 		    tfDidascalia.requestFocus();
 		}
 	    else if((nomeC=tfNomeC.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Nome Comune non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Nome Comune non pua' essere vuoto.");
 		    d.display();
 		    if(numlay!=1){lay.first(panel);numlay=1;}
 		    tfNomeC.requestFocus();
 		}
 	    else if((desA=taDesAnimale.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione Animale non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione Animale non pua' essere vuoto.");
 		    d.display();
 		    if(numlay!=1){lay.first(panel);numlay=1;}
 		    taDesAnimale.requestFocus();
@@ -619,7 +619,7 @@ public class DialogEditFauna extends DefaultDialogEdit
 		            scheda.immagine=tfImmagine.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -633,7 +633,7 @@ public class DialogEditFauna extends DefaultDialogEdit
 					scheda.imgescrementi=tfImgEscrementi.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine degli escrementi "+tfImgEscrementi.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine degli escrementi "+tfImgEscrementi.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -647,7 +647,7 @@ public class DialogEditFauna extends DefaultDialogEdit
 					scheda.imgtracce=tfImgTracce.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine delle tracce"+tfImgTracce.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine delle tracce"+tfImgTracce.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -661,7 +661,7 @@ public class DialogEditFauna extends DefaultDialogEdit
 		            scheda.audio=tfAudio.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file audio "+tfAudio.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file audio "+tfAudio.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -675,7 +675,7 @@ public class DialogEditFauna extends DefaultDialogEdit
 		            scheda.video=tfVideo.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}

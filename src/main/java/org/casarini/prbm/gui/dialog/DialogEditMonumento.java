@@ -64,7 +64,7 @@ public class DialogEditMonumento extends DefaultDialogEdit
 		this.setTitle("Modifica scheda Monumento/Luogo Storico");
 		scheda=(Monumento)rs.scheda;
 		setBackground(Color.lightGray);
-		XMLDirectoryList dl = new XMLDirectoryList(IconFactory.RESOURCE_DIR + icoDir);
+		XMLDirectoryList dl = new XMLDirectoryList(File.separator+icoDir);
 		icone = dl.list();
 		if(scheda.icona.length()!=0)
 		{
@@ -85,12 +85,12 @@ public class DialogEditMonumento extends DefaultDialogEdit
 		fontN=new Font("Dialog", Font.PLAIN, 12);
 		fontB=new Font("Dialog", Font.BOLD, 12);
 
-        icona = IconFactory.getInstance().getImage(scheda.icona);
+		icona = IconFactory.getInstance().getImage(File.separator+scheda.icona);
 
 		setLayout(new BorderLayout(5,5));
 		setVisible(false);
 		setSize(getInsets().left + getInsets().right + 500, getInsets().top + getInsets().bottom + 425);
-		Label label1 = new Label("Proprietà scheda Monumento/Luogo Storico",Label.CENTER);
+		Label label1 = new Label("Proprieta' scheda Monumento/Luogo Storico",Label.CENTER);
 		label1.setFont(new Font("Dialog", Font.BOLD, 14));
 		add("North",label1);
 		
@@ -176,7 +176,7 @@ public class DialogEditMonumento extends DefaultDialogEdit
 		taDescrizione.setBounds(9,90,476,54);
 		taDescrizione.setBackground(Color.yellow);
 		panel1.add(taDescrizione);
-		Label label5 = new Label("Comune e prov. in cui è sito:");
+		Label label5 = new Label("Comune e prov. in cui a' sito:");
 		label5.setBounds(9,153,160,14);
 		label5.setFont(fontB);
 		panel1.add(label5);
@@ -190,7 +190,7 @@ public class DialogEditMonumento extends DefaultDialogEdit
 		tfTipoRilevanza= new CTextField(CTextField.CTF_ALL,50);
 		tfTipoRilevanza.setBounds(108,174,377,18);
 		panel1.add(tfTipoRilevanza);
-		Label label7 = new Label("Proprietà attuale:");
+		Label label7 = new Label("Proprieta' attuale:");
 		label7.setBounds(9,200,110,14);
 		label7.setFont(fontB);
 		panel1.add(label7);
@@ -244,7 +244,7 @@ public class DialogEditMonumento extends DefaultDialogEdit
 		taFattoCostruire = new java.awt.TextArea();
 		taFattoCostruire.setBounds(9,15,476,54);
 		panel2.add(taFattoCostruire);
-		Label label10 = new Label("Monumento - Perchè lo fece costruire:");
+		Label label10 = new Label("Monumento - Percha' lo fece costruire:");
 		label10.setBounds(9,72,300,12);
 		label10.setFont(fontB);
 		panel2.add(label10);
@@ -283,7 +283,7 @@ public class DialogEditMonumento extends DefaultDialogEdit
 		tfDataAvvenimento.setBounds(268,0,217,18);
 		panel3.add(tfDataAvvenimento);
 		panel3.setLayout(null);
-		Label label16 = new Label("Luogo Storico - Da cosa è scaturito l'avvenimento:");
+		Label label16 = new Label("Luogo Storico - Da cosa a' scaturito l'avvenimento:");
 		label16.setBounds(9,27,300,14);
 		label16.setFont(fontB);
 		panel3.add(label16);
@@ -490,17 +490,17 @@ public class DialogEditMonumento extends DefaultDialogEdit
 	    String didascalia,denominazione,descrizione;
 	    if((didascalia=tfDidascalia.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non pua' essere vuoto.");
 		    d.display();
 		}
 	    else if((denominazione=tfDenominazione.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Denominazione non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Denominazione non pua' essere vuoto.");
 		    d.display();
 		}
 	    else if((descrizione=taDescrizione.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione non pua' essere vuoto.");
 		    d.display();
 		}
 		else
@@ -550,7 +550,7 @@ public class DialogEditMonumento extends DefaultDialogEdit
 		            scheda.immagine=tfImmagine.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -564,7 +564,7 @@ public class DialogEditMonumento extends DefaultDialogEdit
 		            scheda.video=tfVideo.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}

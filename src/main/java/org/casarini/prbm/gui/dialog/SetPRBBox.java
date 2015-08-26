@@ -99,7 +99,7 @@ public class SetPRBBox extends Dialog implements ActionListener
 		l_title = new java.awt.Label("Titolo :",Label.RIGHT);
 		l_title.setBounds(70,33,70,13);
 		add(l_title);
-		l_site = new java.awt.Label("Località :",Label.RIGHT);
+		l_site = new java.awt.Label("Localita' :",Label.RIGHT);
 		l_site.setBounds(70,59,70,13);
 		add(l_site);
 		l_data = new java.awt.Label("Data della rilevazione :",Label.RIGHT);

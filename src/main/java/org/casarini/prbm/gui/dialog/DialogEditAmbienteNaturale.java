@@ -63,7 +63,7 @@ public class DialogEditAmbienteNaturale extends DefaultDialogEdit
 		this.setTitle("Modifica scheda Ambiente Naturale");
        	setBackground(Color.lightGray);
 		scheda=(AmbienteNaturale)rs.scheda;
-		XMLDirectoryList dl = new XMLDirectoryList(IconFactory.RESOURCE_DIR + icoDir);
+		XMLDirectoryList dl = new XMLDirectoryList(File.separator+icoDir);
 		icone = dl.list();
 		if(scheda.icona.length()!=0)
 		{
@@ -84,12 +84,12 @@ public class DialogEditAmbienteNaturale extends DefaultDialogEdit
 		fontN=new Font("Dialog", Font.PLAIN, 12);
 		fontB=new Font("Dialog", Font.BOLD, 12);
 
-        icona = IconFactory.getInstance().getImage(scheda.icona);
+		icona = IconFactory.getInstance().getImage(File.separator+scheda.icona);
 
 		setLayout(new BorderLayout(5,5));
 		setVisible(false);
 		setSize(getInsets().left + getInsets().right + 500, getInsets().top + getInsets().bottom + 425);
-		Label label1 = new Label("Proprietà scheda Ambiente Naturale",Label.CENTER);
+		Label label1 = new Label("Proprieta' scheda Ambiente Naturale",Label.CENTER);
 		label1.setFont(new Font("Dialog", Font.BOLD, 14));
 		add("North",label1);
 		
@@ -159,7 +159,7 @@ public class DialogEditAmbienteNaturale extends DefaultDialogEdit
 		label2b2.setBounds(386,30,6,12);
 		label2b2.setFont(fontB);
 		panel1.add(label2b2);
-		Label label3 = new Label("Località:");
+		Label label3 = new Label("Localita':");
 		label3.setBounds(9,53,50,12);
 		label3.setFont(fontB);
 		panel1.add(label3);
@@ -221,14 +221,14 @@ public class DialogEditAmbienteNaturale extends DefaultDialogEdit
 		taUomo = new TextArea();
 		taUomo.setBounds(9,99,476,54);
 		panel2.add(taUomo);
-		Label label15 = new Label("Cosa è piaciuto di più:");
+		Label label15 = new Label("Cosa a' piaciuto di pia':");
 		label15.setBounds(9,164,181,12);
 		label15.setFont(fontB);
 		panel2.add(label15);
 		taOkPiaciuto = new TextArea();
 		taOkPiaciuto.setBounds(9,179,476,54);
 		panel2.add(taOkPiaciuto);
-		Label label12 = new Label("Cosa è piaciuto di meno:");
+		Label label12 = new Label("Cosa a' piaciuto di meno:");
 		label12.setBounds(9,244,181,12);
 		label12.setFont(fontB);
 		panel2.add(label12);
@@ -462,21 +462,21 @@ public class DialogEditAmbienteNaturale extends DefaultDialogEdit
 	    String didascalia,loc,desG;
 	    if((didascalia=tfDidascalia.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non pua' essere vuoto.");
 		    d.display();
    		    if(numlay!=1){lay.first(panel);numlay=1;}
 		    tfDidascalia.requestFocus();
 		}
 	    else if((loc=tfLocalita.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Località non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Localita' non pua' essere vuoto.");
 		    d.display();
 		    if(numlay!=1){lay.first(panel);numlay=1;}
 		    tfLocalita.requestFocus();
 		}
 	    else if((desG=taDesGenerale.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione Generale non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione Generale non pua' essere vuoto.");
 		    d.display();
 		    if(numlay!=1){lay.first(panel);numlay=1;}
 		    taDesGenerale.requestFocus();
@@ -523,7 +523,7 @@ public class DialogEditAmbienteNaturale extends DefaultDialogEdit
 		            scheda.immagine=tfImmagine.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -537,7 +537,7 @@ public class DialogEditAmbienteNaturale extends DefaultDialogEdit
 		            scheda.audio=tfAudio.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file audio "+tfAudio.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file audio "+tfAudio.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -551,7 +551,7 @@ public class DialogEditAmbienteNaturale extends DefaultDialogEdit
 		            scheda.video=tfVideo.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}

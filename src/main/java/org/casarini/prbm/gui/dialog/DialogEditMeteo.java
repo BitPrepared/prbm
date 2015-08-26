@@ -65,7 +65,7 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		this.setTitle("Modifica scheda Meteo");
 		scheda=(Meteo)rs.scheda;
 		setBackground(Color.lightGray);
-		XMLDirectoryList dl = new XMLDirectoryList(IconFactory.RESOURCE_DIR + icoDir);
+		XMLDirectoryList dl = new XMLDirectoryList(File.separator+icoDir);
 		icone = dl.list();
 		if(scheda.icona.length()!=0)
 		{
@@ -81,17 +81,17 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		}
 		else
 			iIcona=0;
-		scheda.icona=icoDir+icone[iIcona];
+		scheda.icona=File.separator+icoDir+icone[iIcona];
 		
 		fontN=new Font("Dialog", Font.PLAIN, 12);
 		fontB=new Font("Dialog", Font.BOLD, 12);
 
-        icona = IconFactory.getInstance().getImage(scheda.icona);
+        icona = IconFactory.getInstance().getImage(File.separator + scheda.icona);
 
 		setLayout(new BorderLayout(5,5));
 		setVisible(false);
 		setSize(getInsets().left + getInsets().right + 500, getInsets().top + getInsets().bottom + 425);
-		Label label1 = new Label("Proprietà scheda Meteo",Label.CENTER);
+		Label label1 = new Label("Proprieta' scheda Meteo",Label.CENTER);
 		label1.setFont(new Font("Dialog", Font.BOLD, 14));
 		add("North",label1);
 		
@@ -168,11 +168,11 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		tfTemperatura = new CTextField(CTextField.CTF_INT,3);
 		tfTemperatura.setBounds(93,50,35,18);
 		panel1.add(tfTemperatura);
-		Label label3b = new Label("°C");
+		Label label3b = new Label("a'C");
 		label3b.setBounds(130,53,13,12);
 		label3b.setFont(fontB);
 		panel1.add(label3b);
-		Label label4 = new Label("Umidità:");
+		Label label4 = new Label("Umidita':");
 		label4.setBounds(162,53,48,12);
 		label4.setFont(fontB);
 		panel1.add(label4);
@@ -201,21 +201,21 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		tfDirVento = new CTextField(CTextField.CTF_ALL,16);
 		tfDirVento.setBounds(104,73,130,18);
 		panel1.add(tfDirVento);
-		Label label7 = new Label("Velocità Vento:");
+		Label label7 = new Label("Velocita' Vento:");
 		label7.setBounds(245,76,87,12);
 		label7.setFont(fontB);
 		panel1.add(label7);
 		tfIntVento = new CTextField(CTextField.CTF_ALL,20);
 		tfIntVento.setBounds(335,73,150,18);
 		panel1.add(tfIntVento);
-		Label label8 = new Label("Pioggia - intensità:");
+		Label label8 = new Label("Pioggia - intensita':");
 		label8.setBounds(9,99,110,14);
 		label8.setFont(fontB);
 		panel1.add(label8);
 		taIntPioggia = new TextArea();
 		taIntPioggia.setBounds(9,116,476,54);
 		panel1.add(taIntPioggia);
-		Label label9 = new Label("Pioggia - torbidità dell'acqua:");
+		Label label9 = new Label("Pioggia - torbidita' dell'acqua:");
 		label9.setBounds(9,181,102,14);
 		label9.setFont(fontB);
 		panel1.add(label9);
@@ -258,7 +258,7 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		
 		panel2=new Panel();
 		panel2.setLayout(null);
-		Label label12 = new Label("Neve - intensità:");
+		Label label12 = new Label("Neve - intensita':");
 		label12.setBounds(9,4,150,14);
 		label12.setFont(fontB);
 		panel2.add(label12);
@@ -272,7 +272,7 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		taTipoNeve = new TextArea();
 		taTipoNeve.setBounds(9,99,476,54);
 		panel2.add(taTipoNeve);
-		Label label14 = new Label("Neve - torbidità dell'acqua disciolta:");
+		Label label14 = new Label("Neve - torbidita' dell'acqua disciolta:");
 		label14.setBounds(9,164,200,14);
 		label14.setFont(fontB);
 		panel2.add(label14);
@@ -301,14 +301,14 @@ public class DialogEditMeteo extends DefaultDialogEdit
 
 		panel3=new Panel();
 		panel3.setLayout(null);
-		Label label18 = new Label("Grandine - Intensità:");
+		Label label18 = new Label("Grandine - Intensita':");
 		label18.setBounds(9,4,150,14);
 		label18.setFont(fontB);
 		panel3.add(label18);
 		taIntGrandine = new java.awt.TextArea();
 		taIntGrandine.setBounds(9,19,476,54);
 		panel3.add(taIntGrandine);
-		Label label19 = new Label("Grandine - torbidità dell'acqua disciolta:");
+		Label label19 = new Label("Grandine - torbidita' dell'acqua disciolta:");
 		label19.setBounds(9,84,250,14);
 		label19.setFont(fontB);
 		panel3.add(label19);
@@ -362,7 +362,7 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		tfAngSole = new CTextField(CTextField.CTF_NUM,3);
 		tfAngSole.setBounds(279,1,35,18);
 		panel4.add(tfAngSole);
-		Label label123b = new Label("°");
+		Label label123b = new Label("a'");
 		label123b.setBounds(317,4,10,14);
 		label123b.setFont(fontB);
 		panel4.add(label123b);
@@ -380,7 +380,7 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		taAnomSole = new TextArea();
 		taAnomSole.setBounds(9,69,476,54);
 		panel4.add(taAnomSole);
-		Label label26 = new Label("Nebbia - visibilità media:");
+		Label label26 = new Label("Nebbia - visibilita' media:");
 		label26.setBounds(9,132,140,14);
 		label26.setFont(fontB);
 		panel4.add(label26);
@@ -398,7 +398,7 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		taTipoNebbia = new TextArea();
 		taTipoNebbia.setBounds(9,169,476,54);
 		panel4.add(taTipoNebbia);
-		Label label28 = new Label("Nubi - velocità di spostamento e direzione:");
+		Label label28 = new Label("Nubi - velocita' di spostamento e direzione:");
 		label28.setBounds(9,232,240,14);
 		label28.setFont(fontB);
 		panel4.add(label28);
@@ -623,7 +623,7 @@ public class DialogEditMeteo extends DefaultDialogEdit
 	    String didascalia;
 	    if((didascalia=tfDidascalia.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non pua' essere vuoto.");
 		    d.display();
 		}
 		else
@@ -691,7 +691,7 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		            scheda.immagine=tfImmagine.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -705,7 +705,7 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		            scheda.audio=tfAudio.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file audio "+tfAudio.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file audio "+tfAudio.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -719,7 +719,7 @@ public class DialogEditMeteo extends DefaultDialogEdit
 		            scheda.video=tfVideo.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}

@@ -63,7 +63,7 @@ public class DialogEditIntervista extends DefaultDialogEdit
 		this.setTitle("Modifica scheda Intervista");
 		scheda=(Intervista)rs.scheda;
 		setBackground(Color.lightGray);
-		XMLDirectoryList dl = new XMLDirectoryList(IconFactory.RESOURCE_DIR + icoDir);
+		XMLDirectoryList dl = new XMLDirectoryList(File.separator+icoDir);
 		icone = dl.list();
 		if(scheda.icona.length()!=0)
 		{
@@ -84,12 +84,12 @@ public class DialogEditIntervista extends DefaultDialogEdit
 		fontN=new Font("Dialog", Font.PLAIN, 12);
 		fontB=new Font("Dialog", Font.BOLD, 12);
 
-        icona = IconFactory.getInstance().getImage(scheda.icona);
+		icona = IconFactory.getInstance().getImage(File.separator+scheda.icona);
 
 		setLayout(new BorderLayout(5,5));
 		setVisible(false);
 		setSize(getInsets().left + getInsets().right + 500, getInsets().top + getInsets().bottom + 425);
-		Label label1 = new Label("Proprietà scheda Intervista",Label.CENTER);
+		Label label1 = new Label("Proprieta' scheda Intervista",Label.CENTER);
 		label1.setFont(new Font("Dialog", Font.BOLD, 14));
 		add("North",label1);
 		
@@ -167,7 +167,7 @@ public class DialogEditIntervista extends DefaultDialogEdit
 		tfNominativo.setBounds(80,50,334,18);
 		tfNominativo.setBackground(Color.yellow);
 		panel1.add(tfNominativo);
-		Label label4 = new Label("Età:");
+		Label label4 = new Label("Eta':");
 		label4.setBounds(9,76,20,12);
 		label4.setFont(fontB);
 		panel1.add(label4);
@@ -188,7 +188,7 @@ public class DialogEditIntervista extends DefaultDialogEdit
 		taStatoCivile = new TextArea();
 		taStatoCivile.setBounds(9,191,476,54);
 		panel1.add(taStatoCivile);
-		Label label7 = new Label("E' del luogo o è forestiero?");
+		Label label7 = new Label("E' del luogo o a' forestiero?");
 		label7.setBounds(9,257,150,12);
 		label7.setFont(fontB);
 		panel1.add(label7);
@@ -220,14 +220,14 @@ public class DialogEditIntervista extends DefaultDialogEdit
 		taVeste = new java.awt.TextArea();
 		taVeste.setBounds(9,19,476,54);
 		panel2.add(taVeste);
-		Label label10 = new Label("Perchè lo si è intervistato:");
+		Label label10 = new Label("Percha' lo si a' intervistato:");
 		label10.setBounds(9,84,250,12);
 		label10.setFont(fontB);
 		panel2.add(label10);
 		taPerche = new TextArea();
 		taPerche.setBounds(9,99,476,54);
 		panel2.add(taPerche);
-		Label label11 = new Label("Come si è arrivati a lui:");
+		Label label11 = new Label("Come si a' arrivati a lui:");
 		label11.setBounds(9,164,250,12);
 		label11.setFont(fontB);
 		panel2.add(label11);
@@ -252,14 +252,14 @@ public class DialogEditIntervista extends DefaultDialogEdit
 		taGradimento = new java.awt.TextArea();
 		taGradimento.setBounds(9,19,476,54);
 		panel3.add(taGradimento);
-		Label label14 = new Label("Affidabilità del racconto:");
+		Label label14 = new Label("Affidabilita' del racconto:");
 		label14.setBounds(9,84,250,12);
 		label14.setFont(fontB);
 		panel3.add(label14);
 		taAffidabilita = new TextArea();
 		taAffidabilita.setBounds(9,99,476,54);
 		panel3.add(taAffidabilita);
-		Label label15 = new Label("Fedeltà del racconto:");
+		Label label15 = new Label("Fedelta' del racconto:");
 		label15.setBounds(9,164,250,12);
 		label15.setFont(fontB);
 		panel3.add(label15);
@@ -499,12 +499,12 @@ public class DialogEditIntervista extends DefaultDialogEdit
 	    String didascalia,nominativo;
 	    if((didascalia=tfDidascalia.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non pua' essere vuoto.");
 		    d.display();
 		}
 	    else if((nominativo=tfNominativo.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Nominativo non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Nominativo non pua' essere vuoto.");
 		    d.display();
 		}
 		else
@@ -554,7 +554,7 @@ public class DialogEditIntervista extends DefaultDialogEdit
 		            scheda.immagine=tfImmagine.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -568,7 +568,7 @@ public class DialogEditIntervista extends DefaultDialogEdit
 		            scheda.audio=tfAudio.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file audio "+tfAudio.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file audio "+tfAudio.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -582,7 +582,7 @@ public class DialogEditIntervista extends DefaultDialogEdit
 		            scheda.video=tfVideo.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}

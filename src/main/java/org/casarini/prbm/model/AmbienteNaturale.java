@@ -90,7 +90,7 @@ public class AmbienteNaturale extends Scheda implements java.io.Serializable
 		return (Scheda)s;
 	}
     
-    public void toHTML(String file, String template)
+    public void toHTML(String file, String outputDir)
     {
         String sTipo="Ambiente Naturale";
         String sIcoTipo=icona;
@@ -212,7 +212,7 @@ public class AmbienteNaturale extends Scheda implements java.io.Serializable
         }
         else
             nodes.addElement(new PRBMParserNode('I',"scheda.negativo", null, 0, null));
-        parser = new PRBMParser("template" + File.separator + template + File.separator + "ambnat.tmpl", file, nodes);
+        parser = new PRBMParser(outputDir + File.separator + "ambnat.tmpl", file, nodes);
         parser.parse();
 
         if(immagine.length()!=0)

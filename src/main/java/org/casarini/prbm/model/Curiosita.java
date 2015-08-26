@@ -69,9 +69,9 @@ public class Curiosita extends Scheda implements java.io.Serializable
 		return (Scheda)s;
 	}
     
-    public void toHTML(String file, String template)
+    public void toHTML(String file, String outputDir)
     {
-        String sTipo="Curiosità/Osservazione";
+        String sTipo="Curiosita'/Osservazione";
         String sIcoTipo=icona;
 		String dir=file.substring(0,file.lastIndexOf("/")+1);
 
@@ -142,7 +142,7 @@ public class Curiosita extends Scheda implements java.io.Serializable
         }
         else
             nodes.addElement(new PRBMParserNode('I',"scheda.impressioni", null, 0, null));
-        parser = new PRBMParser("template" + File.separator + template + File.separator + "curiosita.tmpl", file, nodes);
+        parser = new PRBMParser(outputDir + File.separator + "curiosita.tmpl", file, nodes);
         parser.parse();
 
         if(immagine.length()!=0)

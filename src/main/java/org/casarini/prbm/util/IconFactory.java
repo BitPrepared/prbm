@@ -29,10 +29,10 @@ import java.util.HashMap;
  * Questa classe e' implementata secondo il pattern del singleton.
  */
 public class IconFactory {
-    /**
-     * Il package (direcotry) dove vengono messe le risorse (icone, etc.).
-     */
-    public static final String RESOURCE_DIR = "/org/casarini/prbm/resources/";
+//    /**
+//     * Il package (direcotry) dove vengono messe le risorse (icone, etc.).
+//     */
+//    public static final String RESOURCE_DIR = "/org/casarini/prbm/resources/";
 
     /**
      * L'unica istanza di UsciIconFactory.
@@ -40,7 +40,7 @@ public class IconFactory {
     private static final IconFactory INSTANCE = new IconFactory();
 
     /**
-     * Cache delle icone già create. Vi si accede mediante l'identificatore
+     * Cache delle icone gia' create. Vi si accede mediante l'identificatore
      * dell'immagine.
      */
     private HashMap images = new HashMap();
@@ -72,12 +72,12 @@ public class IconFactory {
             Image image = null;
             Object imageAsObject = images.get(imageIdentifier);
             if (imageAsObject == null) {
-                URL imageURL = IconFactory.class.getResource(RESOURCE_DIR + imageIdentifier);
+                URL imageURL = IconFactory.class.getResource(imageIdentifier);
                 if (imageURL != null) {
                     image = Toolkit.getDefaultToolkit().createImage(imageURL);
                     images.put(imageIdentifier, image);
                 } else {
-                	System.out.println(RESOURCE_DIR + imageIdentifier);
+                	System.out.println(imageIdentifier);
                 }
             } else {
                 image = (Image)imageAsObject;

@@ -21,6 +21,12 @@ package org.casarini.prbm.gui.dialog;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
+
+import org.casarini.prbm.gui.PRB;
 
 public class TemplateBox extends Dialog implements ActionListener
 {
@@ -49,13 +55,32 @@ public class TemplateBox extends Dialog implements ActionListener
         template = new Choice();
         add(template);
         template.setBounds(75,55,200,24);
-        File homefile = new File("");
-        String home=homefile.getAbsolutePath();
-        home += File.separator + "template";
-		File[] list=(new File(home)).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isDirectory())
-        		template.addItem(list[i].getName());
+
+        Set<String> templateDisponibili = new HashSet<String>();
+        
+        //interno
+        URL templateInterno = TemplateBox.class.getResource("/template");
+        File[] filesList = new File(templateInterno.getPath()).listFiles();
+        for(int i=0;i<filesList.length;i++)
+        	if(filesList[i].isDirectory())
+        		templateDisponibili.add(filesList[i].getName());
+        
+        // posizione corrente del jar
+		try {
+			File homefile = new File(PRB.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
+			String home = homefile.getAbsolutePath() + File.separator + "template";
+			File[] list=(new File(home)).listFiles();
+	        for(int i=0;i<list.length;i++)
+	        	if(list[i].isDirectory())
+	        		templateDisponibili.add(filesList[i].getName());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+        
+        for(String name : templateDisponibili) {
+        	template.addItem(name);
+        }
+        
         template.select(0);
         yesButton=new Button("Esporta");
     	add(yesButton);

@@ -61,7 +61,7 @@ public class DialogEditFiore extends DefaultDialogEdit
 		this.setTitle("Modifica scheda Fiore/Erba");
 		scheda=(Fiore)rs.scheda;
     	setBackground(Color.lightGray);
-		XMLDirectoryList dl = new XMLDirectoryList(IconFactory.RESOURCE_DIR + icoDir);
+		XMLDirectoryList dl = new XMLDirectoryList(File.separator+icoDir);
 		icone = dl.list();
 		if(scheda.icona.length()!=0)
 		{
@@ -82,12 +82,12 @@ public class DialogEditFiore extends DefaultDialogEdit
 		fontN=new Font("Dialog", Font.PLAIN, 12);
 		fontB=new Font("Dialog", Font.BOLD, 12);
 
-        icona = IconFactory.getInstance().getImage(scheda.icona);
+		icona = IconFactory.getInstance().getImage(File.separator+scheda.icona);
 
 		setLayout(new BorderLayout(5,5));
 		setVisible(false);
 		setSize(getInsets().left + getInsets().right + 500, getInsets().top + getInsets().bottom + 430);
-		Label label1 = new Label("Proprietà scheda Fiore/Erba",Label.CENTER);
+		Label label1 = new Label("Proprieta' scheda Fiore/Erba",Label.CENTER);
 		label1.setFont(new Font("Dialog", Font.BOLD, 14));
 		add("North",label1);
 		
@@ -255,14 +255,14 @@ public class DialogEditFiore extends DefaultDialogEdit
 		taDistribuzione = new TextArea();
 		taDistribuzione.setBounds(9,87,476,54);
 		panel2.add(taDistribuzione);
-		Label label11 = new Label("Proprietà:");
+		Label label11 = new Label("Proprieta':");
 		label11.setBounds(9,144,81,12);
 		label11.setFont(fontB);
 		panel2.add(label11);
 		taProprieta = new TextArea();
 		taProprieta.setBounds(9,159,476,54);
 		panel2.add(taProprieta);
-		Label label12 = new Label("Curiosità:");
+		Label label12 = new Label("Curiosita':");
 		label12.setBounds(9,216,81,12);
 		label12.setFont(fontB);
 		panel2.add(label12);
@@ -461,17 +461,17 @@ public class DialogEditFiore extends DefaultDialogEdit
 	    String didascalia,nomeC,des;
 	    if((didascalia=tfDidascalia.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non pua' essere vuoto.");
 		    d.display();
 		}
 	    else if((nomeC=tfNomeC.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Nome Comune non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Nome Comune non pua' essere vuoto.");
 		    d.display();
 		}
 	    else if((des=taDesFiore.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione Fiore non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione Fiore non pua' essere vuoto.");
 		    d.display();
 		}
 /*		else if((icona=((String)nomiImg.elementAt(lIcona.getSelectedIndex()))).length()==0)
@@ -522,7 +522,7 @@ public class DialogEditFiore extends DefaultDialogEdit
 		            scheda.immagine=tfImmagine.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -535,7 +535,7 @@ public class DialogEditFiore extends DefaultDialogEdit
 				if (f.exists() && f.isAbsolute() && f.isFile()) {
 		            scheda.imgerbario = tfImgErbario.getText();
 				} else {
-	                AttentionDialog d = new AttentionDialog(parent,"ATTENZIONE!","Il file immagine per l'erbario "+tfImmagine.getText()+" non è corretto!");
+	                AttentionDialog d = new AttentionDialog(parent,"ATTENZIONE!","Il file immagine per l'erbario "+tfImmagine.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -550,7 +550,7 @@ public class DialogEditFiore extends DefaultDialogEdit
 		            scheda.video=tfVideo.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}

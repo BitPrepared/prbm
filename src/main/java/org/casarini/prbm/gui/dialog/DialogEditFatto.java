@@ -63,7 +63,7 @@ public class DialogEditFatto extends DefaultDialogEdit
 		this.setTitle("Modifica scheda Fatto di Cronaca");
 		scheda=(Fatto)rs.scheda;
 		setBackground(Color.lightGray);
-		XMLDirectoryList dl = new XMLDirectoryList(IconFactory.RESOURCE_DIR + icoDir);
+		XMLDirectoryList dl = new XMLDirectoryList(File.separator+icoDir);
 		icone = dl.list();
 		if(scheda.icona.length()!=0)
 		{
@@ -89,7 +89,7 @@ public class DialogEditFatto extends DefaultDialogEdit
 		setLayout(new BorderLayout(5,5));
 		setVisible(false);
 		setSize(getInsets().left + getInsets().right + 500, getInsets().top + getInsets().bottom + 425);
-		Label label1 = new Label("Proprietà scheda Fatto di Cronaca",Label.CENTER);
+		Label label1 = new Label("Proprieta' scheda Fatto di Cronaca",Label.CENTER);
 		label1.setFont(new Font("Dialog", Font.BOLD, 14));
 		add("North",label1);
 		
@@ -167,7 +167,7 @@ public class DialogEditFatto extends DefaultDialogEdit
 		taDescrizione.setBounds(9,84,476,54);
 		taDescrizione.setBackground(Color.yellow);
 		panel1.add(taDescrizione);
-		Label label6 = new Label("Dov'è successo:");
+		Label label6 = new Label("Dov'a' successo:");
 		label6.setBounds(9,148,102,12);
 		label6.setFont(fontB);
 		panel1.add(label6);
@@ -199,14 +199,14 @@ public class DialogEditFatto extends DefaultDialogEdit
 		
 		panel2=new Panel();
 		panel2.setLayout(null);
-		Label label9 = new Label("Cos'è successo?");
+		Label label9 = new Label("Cos'a' successo?");
 		label9.setBounds(9,4,250,14);
 		label9.setFont(fontB);
 		panel2.add(label9);
 		taCosa = new java.awt.TextArea();
 		taCosa.setBounds(9,19,476,54);
 		panel2.add(taCosa);
-		Label label10 = new Label("Perchè? Cosa l'ha provocato?");
+		Label label10 = new Label("Percha'? Cosa l'ha provocato?");
 		label10.setBounds(9,84,250,14);
 		label10.setFont(fontB);
 		panel2.add(label10);
@@ -452,12 +452,12 @@ public class DialogEditFatto extends DefaultDialogEdit
 	    String didascalia,descrizione;
 	    if((didascalia=tfDidascalia.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Didascalia non pua' essere vuoto.");
 		    d.display();
 		}
 	    else if((descrizione=taDescrizione.getText()).length()==0)
 	    {
-	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione non può essere vuoto.");
+	        AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il campo Descrizione non pua' essere vuoto.");
 		    d.display();
 		}
 		else
@@ -501,7 +501,7 @@ public class DialogEditFatto extends DefaultDialogEdit
 		            scheda.immagine=tfImmagine.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file immagine "+tfImmagine.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -515,7 +515,7 @@ public class DialogEditFatto extends DefaultDialogEdit
 		            scheda.audio=tfAudio.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file audio "+tfAudio.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file audio "+tfAudio.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
@@ -529,7 +529,7 @@ public class DialogEditFatto extends DefaultDialogEdit
 		            scheda.video=tfVideo.getText();
 				else
 				{
-	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non è corretto!");
+	                AttentionDialog d=new AttentionDialog(parent,"ATTENZIONE!","Il file video "+tfVideo.getText()+" non a' corretto!");
 					d.display();
 		            return;
 				}
