@@ -85,7 +85,7 @@ public class DialogEditMonumento extends DefaultDialogEdit
 		fontN=new Font("Dialog", Font.PLAIN, 12);
 		fontB=new Font("Dialog", Font.BOLD, 12);
 
-		icona = IconFactory.getInstance().getImage(File.separator+scheda.icona);
+		icona = IconFactory.getInstance().getImage("/finale"+File.separator+icoDir+icone[iIcona]);
 
 		setLayout(new BorderLayout(5,5));
 		setVisible(false);

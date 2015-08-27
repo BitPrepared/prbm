@@ -42,7 +42,8 @@ public class RunnerConfig {
 		InputStream in = null;
     	props = new Properties();
         try {
-            in = new FileInputStream(PRB_PROPERTIES_FILE);
+			String home = System.getProperty("user.home");
+            in = new FileInputStream(home + File.separator + PRB_PROPERTIES_FILE);
             props.load(in); // Can throw IOException
         } catch (FileNotFoundException fnfe) {
             System.out.println(PRB_PROPERTIES_FILE + " file non trovato");
@@ -55,7 +56,8 @@ public class RunnerConfig {
 	
 	public void save() {
 		try {
-			props.store(new FileOutputStream(PRB_PROPERTIES_FILE), null);
+			String home = System.getProperty("user.home");
+			props.store(new FileOutputStream(home + File.separator + PRB_PROPERTIES_FILE), null);
 		} catch (IOException ioe) {
 			System.out.println("Errore nella scrittura del file " + PRB_PROPERTIES_FILE + ": " + ioe.getMessage());
 		}

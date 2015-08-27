@@ -18,15 +18,24 @@
  */
 
 package org.casarini.prbm.gui.dialog;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Button;
+import java.awt.Choice;
+import java.awt.Dialog;
+import java.awt.Frame;
+import java.awt.Label;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.casarini.prbm.gui.PRB;
+import org.casarini.prbm.util.StaticLoader;
 
 public class TemplateBox extends Dialog implements ActionListener
 {
@@ -37,7 +46,7 @@ public class TemplateBox extends Dialog implements ActionListener
     private Choice template;
     private String result;
 
-    public TemplateBox(Frame parent)
+    public TemplateBox(Frame parent) throws IOException
     {
 	    super(parent, "Scelta del template...", true);
 	    setResizable(false);
@@ -58,21 +67,41 @@ public class TemplateBox extends Dialog implements ActionListener
 
         Set<String> templateDisponibili = new HashSet<String>();
         
-        //interno
-        URL templateInterno = TemplateBox.class.getResource("/template");
-        File[] filesList = new File(templateInterno.getPath()).listFiles();
-        for(int i=0;i<filesList.length;i++)
-        	if(filesList[i].isDirectory())
-        		templateDisponibili.add(filesList[i].getName());
+        final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+        if(!jarFile.isFile()) { 
+	        
+	        //interno
+	        URL templateInterno = StaticLoader.loadResource("/template");
+	        
+	        System.out.println("Cerco in "+templateInterno.getFile());        
+	        File[] filesList = new File(templateInterno.getFile()).listFiles();
+	        if ( null != filesList ) {
+		        for(int i=0;i<filesList.length;i++)
+		        	if(filesList[i].isDirectory()) {
+		        		String name = filesList[i].getName();
+		        		System.out.println("->"+name);
+						templateDisponibili.add(name);
+		        	}
+	        }
+	        
+        } else {
+	        List<String> elenco = StaticLoader.listDir("/template");
+	        for (String element : elenco) {
+	        	templateDisponibili.add(element);
+			}
+        }
         
         // posizione corrente del jar
 		try {
 			File homefile = new File(PRB.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
-			String home = homefile.getAbsolutePath() + File.separator + "template";
+			String home = homefile.getParent() + File.separator + "template";
+			System.out.println("Cerco in "+home);
 			File[] list=(new File(home)).listFiles();
-	        for(int i=0;i<list.length;i++)
-	        	if(list[i].isDirectory())
-	        		templateDisponibili.add(filesList[i].getName());
+			if ( list != null ) {
+		        for(int i=0;i<list.length;i++)
+		        	if(list[i].isDirectory())
+		        		templateDisponibili.add(list[i].getName());
+			}
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}

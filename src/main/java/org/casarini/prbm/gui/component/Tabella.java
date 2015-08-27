@@ -22,7 +22,9 @@ package org.casarini.prbm.gui.component;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Vector;
+import java.util.jar.JarFile;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -58,6 +60,7 @@ import org.casarini.prbm.parser.PRBMParser;
 import org.casarini.prbm.parser.PRBMParserNode;
 import org.casarini.prbm.util.DiskUtil;
 import org.casarini.prbm.util.IconFactory;
+import org.casarini.prbm.util.StaticLoader;
 
 
 public class Tabella extends Canvas implements MouseListener,ActionListener
@@ -149,7 +152,7 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
 
         //andiamoci a prendere le immagini
         for(int i = 0; i < 10; i++) {
-            icone[i] = IconFactory.getInstance().getImage("ico"+Integer.toString(i)+".gif");
+            icone[i] = IconFactory.getInstance().getImage("/ico"+Integer.toString(i)+".gif");
         }
 
         //creiamoci i menu
@@ -1141,7 +1144,7 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
         fillResource(RICALCOLA);
     }
     
-    public void toHTML(PRBParam param, String template)
+    public void toHTML(PRBParam param, String template) throws MalformedURLException
     {
         
         //imposto estensione
@@ -1153,26 +1156,31 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
         
         
         // posizione corrente del jar
-        String home = System.getProperty("user.dir"); 
+        String home = System.getProperty("user.dir");
+        String baseDir = home;
 		try {
 			File homefile = new File(PRB.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath());
 			home = homefile.getAbsolutePath();
+			baseDir = homefile.getAbsolutePath();
+			if ( homefile.isFile() ) {
+				home = homefile.getParent();
+			}
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
         
         //imposto directory di output
-        String dir;
+        String targetDir;
         if(param.dir.length()!=0)
-        	dir=param.dir;
+        	targetDir=param.dir;
         else
-        	dir=home + File.separator + "output";
+        	targetDir=home + File.separator + "output";
 
-        File dirfile=new File(dir);
+        File dirfile=new File(targetDir);
         if(!dirfile.isAbsolute())
         {
-        	dir=home + File.separator + dir;
-        	dirfile=new File(dir);
+        	targetDir=home + File.separator + targetDir;
+        	dirfile=new File(targetDir);
         }
         if(!dirfile.exists()||!dirfile.isDirectory())
         {
@@ -1180,45 +1188,70 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
         }
 
         System.out.println("---- INIZIO OUTPUT ----");
-        System.out.println("HOME: "+home);
-		System.out.println("TARGET: "+dir);
+        System.out.println("HOME: "+home); // /Users/yoghi/Documents/Workspace/prbm/target
+        System.out.println("BASEDIR: "+baseDir);
+		System.out.println("TARGET: "+targetDir); // Es: /Users/yoghi/Documents/Workspace/prbm/target/output
 
         //preparo la dir di output
-		creaOutputDir(home, dir,"guida");
-        creaOutputDir(home, dir,"guida/icone");
-        creaOutputDir(home, dir,"immagini");
-        creaOutputDir(home, dir,"icone");
-        creaOutputDir(home, dir,"icone/alb");
-        creaOutputDir(home, dir,"icone/amb");
-        creaOutputDir(home, dir,"icone/cro");
-        creaOutputDir(home, dir,"icone/cur");
-        creaOutputDir(home, dir,"icone/fau");
-        creaOutputDir(home, dir,"icone/fio");
-        creaOutputDir(home, dir,"icone/int");
-        creaOutputDir(home, dir,"icone/met");
-        creaOutputDir(home, dir,"icone/mon");
-		creaOutputDir(home, dir,"paesaggi");
+		creaOutputDir(baseDir, targetDir,"guida");
+        creaOutputDir(baseDir, targetDir,"guida/icone");
+        creaOutputDir(baseDir, targetDir,"immagini");
+        creaOutputDir(baseDir, targetDir,"icone");
+        creaOutputDir(baseDir, targetDir,"icone/alb");
+        creaOutputDir(baseDir, targetDir,"icone/amb");
+        creaOutputDir(baseDir, targetDir,"icone/cro");
+        creaOutputDir(baseDir, targetDir,"icone/cur");
+        creaOutputDir(baseDir, targetDir,"icone/fau");
+        creaOutputDir(baseDir, targetDir,"icone/fio");
+        creaOutputDir(baseDir, targetDir,"icone/int");
+        creaOutputDir(baseDir, targetDir,"icone/met");
+        creaOutputDir(baseDir, targetDir,"icone/mon");
+		creaOutputDir(baseDir, targetDir,"paesaggi");
 
         //copio tutti i file della directory del template tranne quelli con estensione .tmpl
         
 		File[] list;
-        URL templateInterno = TemplateBox.class.getResource("/template");
-        File fileCheckInterno = new File(templateInterno.getPath() + File.separator + template);
-		if( fileCheckInterno.exists() ) {
-			home = templateInterno.getPath();
-        	list = fileCheckInterno.listFiles();	
-        } else {
-        	File fileCheckEsterno = new File(home + File.separator + "template" + File.separator + template);
-        	list = fileCheckEsterno.listFiles();
-        }
-        
-        for(int i=0;i<list.length;i++) {
-			File fileCorrente = list[i];
-			System.out.println("Analizzo "+fileCorrente.getAbsolutePath());
-			if(fileCorrente.isFile() && !fileCorrente.getName().endsWith(".tmpl"))
-        		DiskUtil.copyFile(fileCorrente.getAbsolutePath(),dir+File.separator+fileCorrente.getName());
+		
+		if ( baseDir.equalsIgnoreCase(home) ){
+			//caso esterno al jar
+	        URL templateInterno = StaticLoader.loadResource("/template/");
+	        File fileCheckInterno = new File(templateInterno.getPath() + File.separator + template);
+			if( fileCheckInterno.exists() ) {
+				home = templateInterno.getPath();
+	        	list = fileCheckInterno.listFiles();	
+	        } else {
+	        	File fileCheckEsterno = new File(home + File.separator + "template" + File.separator + template);
+	        	list = fileCheckEsterno.listFiles();
+	        }
+			for(int i=0;i<list.length;i++) {
+				File fileCorrente = list[i];
+				System.out.println("Analizzo "+fileCorrente.getPath());
+				if(fileCorrente.isFile() && !fileCorrente.getName().endsWith(".tmpl"))
+					System.out.println("copio verso "+targetDir+File.separator+fileCorrente.getName());
+	        		DiskUtil.copyFile(fileCorrente.getPath(),targetDir+File.separator+fileCorrente.getName());
+			}
+		} else {
+			list = StaticLoader.listFile("template/"+template); // non serv baseDir perche' lavoro gia sul jar
+			if( list.length > 0 ) {
+				System.out.println("INTERNO AL JAR");
+				home = StaticLoader.loadResource("/template/").getPath();
+				// dir : /Users/yoghi/Documents/Workspace/prbm/target/output
+				StaticLoader.copyFileFor("template/"+template,targetDir);
+	        } else {
+	        	System.out.println("ESTERNO");
+	        	File fileCheckEsterno = new File(home + File.separator + "template" + File.separator + template);
+	        	list = fileCheckEsterno.listFiles();
+	        	for(int i=0;i<list.length;i++) {
+	    			File fileCorrente = list[i];
+	    			System.out.println("Analizzo "+fileCorrente.getPath());
+	    			if(fileCorrente.isFile() && !fileCorrente.getName().endsWith(".tmpl"))
+	    				System.out.println("copio verso "+targetDir+File.separator+fileCorrente.getName());
+	            		DiskUtil.copyFile(fileCorrente.getPath(),targetDir+File.separator+fileCorrente.getName());
+	    		}
+	        }
 		}
-
+		
+		System.out.println("creazione html");
         String[] ncols={"SL","SV","DV","DL"};
         for(int i=0;i<m_row;i++)
             for(int j=0;j<4;j++)
@@ -1229,58 +1262,58 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
                     if(start.length()<2)
                     	start="0"+start;
                     Resource r=dt.getResource(j,i,k);
-                    String dest = home + File.separator + template;
+                    String dest = targetDir;
                     switch(r.type)
                     {
                         case 0:
                             Scheda s0=(Scheda)r.scheda;
                             s0.html=start+ncols[j]+"PAE"+k+ext;
-                            s0.toHTML(dir+"/"+s0.html,dest);
+                            s0.toHTML(targetDir+"/"+s0.html,dest);
                             break;
                         case 1:
                             Fiore s1=(Fiore)r.scheda;
                             s1.html=start+ncols[j]+"FIO"+k+ext;
-                            s1.toHTML(dir+"/"+s1.html,dest);
+                            s1.toHTML(targetDir+"/"+s1.html,dest);
                             break;
                         case 2:
                             Albero s2=(Albero)r.scheda;
                             s2.html=start+ncols[j]+"ALB"+k+ext;
-                            s2.toHTML(dir+"/"+s2.html,dest);
+                            s2.toHTML(targetDir+"/"+s2.html,dest);
                             break;
                         case 3:
                             Fauna s3=(Fauna)r.scheda;
                             s3.html=start+ncols[j]+"FAU"+k+ext;
-                            s3.toHTML(dir+"/"+s3.html,dest);
+                            s3.toHTML(targetDir+"/"+s3.html,dest);
                             break;
                         case 4:
                             AmbienteNaturale s4=(AmbienteNaturale)r.scheda;
                             s4.html=start+ncols[j]+"AMB"+k+ext;
-                            s4.toHTML(dir+"/"+s4.html,dest);
+                            s4.toHTML(targetDir+"/"+s4.html,dest);
                             break;
                         case 5:
                             Meteo s5=(Meteo)r.scheda;
                             s5.html=start+ncols[j]+"MET"+k+ext;
-                            s5.toHTML(dir+"/"+s5.html,dest);
+                            s5.toHTML(targetDir+"/"+s5.html,dest);
                             break;
                         case 6:
                             Monumento s6=(Monumento)r.scheda;
                             s6.html=start+ncols[j]+"MON"+k+ext;
-                            s6.toHTML(dir+"/"+s6.html,dest);
+                            s6.toHTML(targetDir+"/"+s6.html,dest);
                             break;
                         case 7:
                             Intervista s7=(Intervista)r.scheda;
                             s7.html=start+ncols[j]+"INT"+k+ext;
-                            s7.toHTML(dir+"/"+s7.html,dest);
+                            s7.toHTML(targetDir+"/"+s7.html,dest);
                             break;
                         case 8:
                             Fatto s8=(Fatto)r.scheda;
                             s8.html=start+ncols[j]+"CRO"+k+ext;
-                            s8.toHTML(dir+"/"+s8.html,dest);
+                            s8.toHTML(targetDir+"/"+s8.html,dest);
                             break;
                         case 9:
                             Curiosita s9=(Curiosita)r.scheda;
                             s9.html=start+ncols[j]+"CUR"+k+ext;
-                            s9.toHTML(dir+"/"+s9.html,dest);
+                            s9.toHTML(targetDir+"/"+s9.html,dest);
                             break;
                     }
                 }
@@ -1316,7 +1349,9 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
         }
         else
             nodes.addElement(new PRBMParserNode('I',"percorso.dir", null, 0, null));
-        parser = new PRBMParser(home + File.separator + template + File.separator + "info.tmpl", dir + "/info.html", nodes);
+        
+        parser = new PRBMParser(targetDir + File.separator + "info.tmpl", targetDir + "/info.html", nodes);
+        
         parser.parse();
 
         //INDEX.HTML
@@ -1373,19 +1408,42 @@ public class Tabella extends Canvas implements MouseListener,ActionListener
             }
         }
         nodes.addElement(new PRBMParserNode('R',"traccia",null,m_row,tnodes));
-        parser = new PRBMParser(home + File.separator + template + File.separator + "index.tmpl", dir+"/index.html", nodes);
+        
+        parser = new PRBMParser(targetDir + File.separator + "index.tmpl", targetDir+"/index.html", nodes);
         parser.parse();
     }
 
 	private void creaOutputDir(String baseDir, String targetDir, String innerDir) {
 		
+//		innerDir = "guida"
+//		baseDir = /Users/yoghi/Documents/Workspace/prbm/target/prbm-0.0.1-SNAPSHOT.jar
+//		targetDir = /Users/yoghi/Documents/Workspace/prbm/target/output
+		
 		File[] list;
 		File diricone=new File(targetDir+File.separator+innerDir);
         diricone.mkdir();
-		list = ( new File(baseDir + File.separator + "finale" + File.separator + innerDir)).listFiles();
-        for(int i=0;i<list.length;i++)
-        	if(list[i].isFile())
-        		DiskUtil.copyFile(baseDir + File.separator + "finale"+File.separator+innerDir+File.separator+list[i].getName(),targetDir+File.separator+innerDir+File.separator+list[i].getName());
+        
+        //creaOutputDir(home, dir,"guida"); -> finale/guida/
+        try {
+        	final File jarFile = new File(getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+            if(!jarFile.isFile()) {
+            	System.out.println("no jar");
+            	list = ( new File(baseDir + File.separator + "finale" + File.separator + innerDir)).listFiles();
+            	for(int i=0;i<list.length;i++) {
+                	if(list[i].isFile()) {
+                		String fileName = baseDir + File.separator + "finale"+File.separator+innerDir+File.separator+list[i].getName();
+        				System.out.println("Copio "+fileName);
+                		DiskUtil.copyFile(fileName,targetDir+File.separator+innerDir+File.separator+list[i].getName());
+                	}
+            	}
+            } else {
+            	System.out.println("jar copy da dir resource finale/guida verso la target "+targetDir+"/guida"); ///Users/yoghi/Documents/Workspace/prbm/target/output/guida
+//            	list = StaticLoader.listFile("finale" + File.separator + innerDir); // non serv baseDir perche' lavoro gia sul jar
+            	StaticLoader.copyFileFor("finale" + File.separator + innerDir,diricone.getAbsolutePath());
+            }
+        } catch(Exception e){
+        	e.printStackTrace();
+        }
 	}
     
     String r_html(Passo passo,int col)

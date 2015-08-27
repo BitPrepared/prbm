@@ -132,11 +132,14 @@ public class Meteo extends Scheda implements java.io.Serializable
 		return (Scheda)s;
 	}
     
-    public void toHTML(String file, String outputDir)
+    public void toHTML(String filename, String outputDir)
     {
+    	
+    	System.out.println("write meteo con nome "+filename+" nella dir "+outputDir);
+    	
         String sTipo="Meteo";
         String sIcoTipo=icona;
-		String dir=file.substring(0,file.lastIndexOf("/")+1);
+		String dir=filename.substring(0,filename.lastIndexOf("/")+1);
 
         Vector nodes;
         PRBMParser parser;
@@ -352,7 +355,7 @@ public class Meteo extends Scheda implements java.io.Serializable
         }
         else
             nodes.addElement(new PRBMParserNode('I',"scheda.eventi", null, 0, null));
-        parser = new PRBMParser(outputDir + File.separator + "meteo.tmpl", file, nodes);
+        parser = new PRBMParser(outputDir + File.separator + "meteo.tmpl", filename, nodes);
         parser.parse();
 
         if(immagine.length()!=0)

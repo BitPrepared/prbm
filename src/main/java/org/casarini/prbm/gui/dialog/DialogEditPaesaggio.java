@@ -254,7 +254,7 @@ public class DialogEditPaesaggio extends DefaultDialogEdit
 		
         for(int i=0; i < paesaggi.length; i++) {
         	lIcona.add(paesaggi[i][0]);
-        	imgIcone.addElement(IconFactory.getInstance().getImage(paesaggi[i][1]));
+        	imgIcone.addElement(IconFactory.getInstance().getImage(File.separator + paesaggi[i][1]));
         }
         
         

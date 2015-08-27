@@ -22,6 +22,7 @@ package org.casarini.prbm.gui;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.net.MalformedURLException;
 import java.util.*;
 import java.util.zip.*;
 import java.text.SimpleDateFormat;
@@ -360,11 +361,18 @@ public class PRB extends Frame implements WindowListener, ActionListener, Compon
     }
 
     public void selectedCreate() {
-        TemplateBox tb = new TemplateBox(this);
-        String res = tb.getResult();
-        if (res.length() > 0)
-            c_tab.toHTML(c_param, res);
-        tb.dispose();
+        TemplateBox tb;
+		try {
+			tb = new TemplateBox(this);
+			String res = tb.getResult();
+			if (res.length() > 0)
+				c_tab.toHTML(c_param, res);
+			tb.dispose();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     public void selectedSave() {

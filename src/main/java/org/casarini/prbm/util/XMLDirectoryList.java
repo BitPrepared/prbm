@@ -50,8 +50,8 @@ public class XMLDirectoryList {
 	public XMLDirectoryList(String dirname) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		try {
-			DocumentBuilder builder = factory.newDocumentBuilder();
-			document = builder.parse(XMLDirectoryList.class.getResource(dirname + XML_FILENAME).openStream());
+			DocumentBuilder builder = factory.newDocumentBuilder();			
+			document = builder.parse(XMLDirectoryList.class.getResource("/finale" + dirname + XML_FILENAME).openStream());
 		} catch (SAXException sxe) {
 			// Errore generato durante il parsing
 			Exception  x = sxe;

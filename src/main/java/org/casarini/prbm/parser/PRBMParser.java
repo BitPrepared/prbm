@@ -33,6 +33,9 @@ public class PRBMParser
     private boolean ifjump=false;
 
     public PRBMParser(String tmplfile, String outfile, Vector nodes) {
+    	
+    	System.out.println("Parso "+tmplfile+ " e scrivo su "+outfile);
+    	
         this.tmplfile=tmplfile;
         this.outfile=outfile;
         this.nodes=nodes;

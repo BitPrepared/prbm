@@ -19,7 +19,10 @@
 
 package org.casarini.prbm.model;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.Vector;
 
 import org.casarini.prbm.parser.PRBMParser;
@@ -64,11 +67,13 @@ public class Scheda implements Serializable
 		return s;
 	}
     
-    public void toHTML(String file, String outputDir)
+    public void toHTML(String destFileName, String workDir)
     {
+    	System.out.println("scrivo scheda con nome "+destFileName+" a "+workDir);
+    	
         String sTipo="Paesaggio";
         String sIcoTipo=icona;
-		String dir=file.substring(0,file.lastIndexOf("/")+1);
+		String dirDest=destFileName.substring(0,destFileName.lastIndexOf("/")+1);
 
         Vector nodes;
         PRBMParser parser;
@@ -109,14 +114,14 @@ public class Scheda implements Serializable
             nodes.addElement(new PRBMParserNode('I',"scheda.video", null, 0, null));
         nodes.addElement(new PRBMParserNode('S',"scheda.dataora.value", TimeStamp.toHtml(timestamp), 0, null));
         nodes.addElement(new PRBMParserNode('S',"scheda.note", note, 0, null));
-        parser = new PRBMParser(outputDir + File.separator + "paesaggio.tmpl", file, nodes);
+        parser = new PRBMParser(workDir + File.separator + "paesaggio.tmpl", destFileName, nodes);
         parser.parse();
 
         if(immagine.length()!=0)
         {
             File f=new File(immagine);
             if(f.exists())
-                DiskUtil.copyFile(immagine,dir+immagine.substring(immagine.lastIndexOf(File.separatorChar)+1));
+                DiskUtil.copyFile(immagine,dirDest+immagine.substring(immagine.lastIndexOf(File.separatorChar)+1));
             else
                 System.out.println("Errore");
         }
@@ -124,7 +129,7 @@ public class Scheda implements Serializable
         {
             File f=new File(video);
             if(f.exists())
-                DiskUtil.copyFile(video,dir+video.substring(video.lastIndexOf(File.separatorChar)+1));
+                DiskUtil.copyFile(video,dirDest+video.substring(video.lastIndexOf(File.separatorChar)+1));
             else
                 System.out.println("Errore");
         }
